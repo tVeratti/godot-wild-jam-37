@@ -1,0 +1,118 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://VideoPlayer/VideoPlayer.gd" type="Script" id=1]
+[ext_resource path="res://VideoPlayer/video_player.png" type="Texture" id=2]
+[ext_resource path="res://VideoPlayer/Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Timeline/Entity/Entity.tscn" type="PackedScene" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.933333, 0.0784314, 0.0784314, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 0.392157 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 1, 1, 0.235294 )
+
+[node name="VideoPlayer" type="Node2D"]
+script = ExtResource( 1 )
+timeline_path = NodePath("Video/Timeline/ProgressBar")
+knob_path = NodePath("Video/Timeline/Knob")
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( -304, -172 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Controlss" type="MarginContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1280.0
+margin_bottom = 720.0
+mouse_filter = 2
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controlss"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 710.0
+
+[node name="Spring" type="Control" parent="Controlss/VBoxContainer"]
+margin_right = 1260.0
+margin_bottom = 682.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Progress" type="ProgressBar" parent="Controlss/VBoxContainer"]
+margin_top = 686.0
+margin_right = 1260.0
+margin_bottom = 696.0
+rect_min_size = Vector2( 0, 10 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 20.0
+percent_visible = false
+
+[node name="TimelineControls" type="HBoxContainer" parent="Controlss/VBoxContainer"]
+margin_top = 700.0
+margin_right = 1260.0
+margin_bottom = 700.0
+
+[node name="Video" type="Node2D" parent="."]
+
+[node name="Screen" type="Sprite" parent="Video"]
+modulate = Color( 0.164706, 0.164706, 0.164706, 1 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Timeline" type="Node2D" parent="Video"]
+
+[node name="ProgressBar" type="ProgressBar" parent="Video/Timeline"]
+margin_left = 10.0
+margin_top = 630.0
+margin_right = 1270.0
+margin_bottom = 640.0
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Knob" parent="Video/Timeline" instance=ExtResource( 3 )]
+position = Vector2( 200, 615 )
+
+[node name="Controls" type="Node2D" parent="Video"]
+
+[node name="Play" parent="Video/Controls" instance=ExtResource( 3 )]
+position = Vector2( 10, 660 )
+
+[node name="Entity" parent="Video" instance=ExtResource( 4 )]
+position = Vector2( 615.361, 282.986 )
+
+[node name="Timestamp" type="Label" parent="."]
+margin_left = 24.0272
+margin_top = 89.4343
+margin_right = 64.0272
+margin_bottom = 103.434
+text = "0.0
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Video/Timeline/Knob" to="." method="_on_Knob_pressed"]
+[connection signal="pressed" from="Video/Controls/Play" to="." method="_on_Play_pressed"]
