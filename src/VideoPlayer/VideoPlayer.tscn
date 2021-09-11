@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://VideoPlayer/VideoPlayer.gd" type="Script" id=1]
 [ext_resource path="res://VideoPlayer/video_player.png" type="Texture" id=2]
-[ext_resource path="res://VideoPlayer/Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://VideoPlayer/Controls/Buttons/Knob.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Timeline/Entity/Entity.tscn" type="PackedScene" id=4]
+[ext_resource path="res://VideoPlayer/Controls/Buttons/PlayButton.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.0784314, 0.0784314, 1 )
@@ -24,7 +25,6 @@ knob_path = NodePath("Video/Timeline/Knob")
 
 [node name="Background" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-position = Vector2( -304, -172 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
 centered = false
@@ -72,19 +72,20 @@ margin_right = 1260.0
 margin_bottom = 700.0
 
 [node name="Video" type="Node2D" parent="."]
+position = Vector2( 0, 100 )
 
 [node name="Screen" type="Sprite" parent="Video"]
 modulate = Color( 0.164706, 0.164706, 0.164706, 1 )
+scale = Vector2( 1.5, 1 )
 texture = ExtResource( 2 )
 centered = false
 
 [node name="Timeline" type="Node2D" parent="Video"]
+position = Vector2( 20, 840 )
 
 [node name="ProgressBar" type="ProgressBar" parent="Video/Timeline"]
-margin_left = 10.0
-margin_top = 630.0
-margin_right = 1270.0
-margin_bottom = 640.0
+margin_right = 1830.0
+margin_bottom = 10.0
 custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 4 )
 percent_visible = false
@@ -92,22 +93,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="StaticBody2D" type="StaticBody2D" parent="Video/Timeline/ProgressBar"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Video/Timeline/ProgressBar/StaticBody2D"]
+polygon = PoolVector2Array( 1828.86, -0.703369, 1828.86, 9.19617, 1.69622, 10.6104, 2.40333, 0.00378418 )
+one_way_collision = true
+
 [node name="Knob" parent="Video/Timeline" instance=ExtResource( 3 )]
-position = Vector2( 200, 615 )
+position = Vector2( 0, -15 )
+
+[node name="TimeLeft" type="Label" parent="Video/Timeline"]
+margin_left = 1838.07
+margin_top = -2.66968
+margin_right = 1878.07
+margin_bottom = 11.3303
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Controls" type="Node2D" parent="Video"]
+position = Vector2( 20, 900 )
 
-[node name="Play" parent="Video/Controls" instance=ExtResource( 3 )]
-position = Vector2( 10, 660 )
+[node name="PlayButton" parent="Video/Controls" instance=ExtResource( 6 )]
 
 [node name="Entity" parent="Video" instance=ExtResource( 4 )]
 position = Vector2( 615.361, 282.986 )
 
 [node name="Timestamp" type="Label" parent="."]
-margin_left = 24.0272
-margin_top = 89.4343
-margin_right = 64.0272
-margin_bottom = 103.434
+margin_left = 28.0317
+margin_top = 65.4072
+margin_right = 68.0317
+margin_bottom = 96.4072
 text = "0.0
 "
 __meta__ = {
@@ -115,4 +131,4 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="Video/Timeline/Knob" to="." method="_on_Knob_pressed"]
-[connection signal="pressed" from="Video/Controls/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Video/Controls/PlayButton" to="." method="_on_PlayButton_pressed"]

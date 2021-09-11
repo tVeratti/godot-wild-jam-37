@@ -42,7 +42,7 @@ func set_progress(value):
 
 func set_timestamp(value):
 	state = States.PAUSED
-	timestamp = value
+	timestamp = clamp(value, 0, duration)
 	emit_signal("timestamp_changed")
 
 

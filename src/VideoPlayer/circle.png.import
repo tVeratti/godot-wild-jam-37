@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/timeline.png-422febf71589b748b1d54f5dc6cbedab.stex"
+path="res://.import/circle.png-51a3b21143c387604ea5c5c3ab9913f5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VideoPlayer/timeline.png"
-dest_files=[ "res://.import/timeline.png-422febf71589b748b1d54f5dc6cbedab.stex" ]
+source_file="res://VideoPlayer/circle.png"
+dest_files=[ "res://.import/circle.png-51a3b21143c387604ea5c5c3ab9913f5.stex" ]
 
 [params]
 
