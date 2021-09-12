@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 const GRAVITY = 4000.0
 const SPEED = 400.0
+const SPEED_SPRINT = 800.0
 const JUMP_FORCE = GRAVITY / -5
 
 var velocity:Vector2 = Vector2.ZERO
@@ -29,10 +30,14 @@ func _physics_process(delta):
 	if not on_floor and previous_on_floor:
 		JumpFallTimer.start()
 	
+	var speed = SPEED
+	if Input.is_action_pressed("sprint"):
+		speed = SPEED_SPRINT
+	
 	if Input.is_action_pressed("left"):
-		 velocity.x = -SPEED
+		 velocity.x = -speed
 	elif Input.is_action_pressed("right"):
-		velocity.x = SPEED
+		velocity.x = speed
 	
 	if Input.is_action_just_pressed("down"):
 		if not FallThroughTimer.time_left > 0:

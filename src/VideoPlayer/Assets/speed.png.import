@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/forward.png-d98231089c0614370c00724c1e6c2873.stex"
+path="res://.import/speed.png-4abc0901a9a88cb0248c28967d138a52.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VideoPlayer/Assets/forward.png"
-dest_files=[ "res://.import/forward.png-d98231089c0614370c00724c1e6c2873.stex" ]
+source_file="res://VideoPlayer/Assets/speed.png"
+dest_files=[ "res://.import/speed.png-4abc0901a9a88cb0248c28967d138a52.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=true
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

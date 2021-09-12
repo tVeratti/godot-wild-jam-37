@@ -17,6 +17,7 @@ onready var TimeLeft = $Video/Timeline/TimeLeft
 
 var knob_dragging:bool = false
 
+
 func _ready():
 	State.timeline.connect("paused", self, "_on_paused")
 	State.timeline.connect("played", self, "_on_played")
@@ -63,4 +64,5 @@ func _on_Knob_pressed():
 		State.player.jump()
 
 
-
+func _on_SpeedButton_pressed():
+	State.timeline.toggle_playback_speed()

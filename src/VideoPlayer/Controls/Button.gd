@@ -7,6 +7,8 @@ signal pressed()
 export(Texture) var texture:Texture setget _set_texture
 var _texture:Texture
 
+export(bool) var generate_collisions:bool = true
+
 onready var ButtonSprite:Sprite = $PressArea/Sprite
 onready var ActionAnimation:AnimationPlayer = $ActionAnimation
 onready var PlatformBody:StaticBody2D = $Platform
@@ -35,19 +37,20 @@ func _set_texture(value):
 	if is_instance_valid(ButtonSprite):
 		ButtonSprite.texture = value
 		
-		# Generate the collision shape based on the texture bitmap
-		var collision_shape = Shapes.create_collision_polygon(Vector2.ZERO, value)
-		
-		# Update/Add collision polygons
-		var index = 1
-		for polygon in collision_shape.polygons:
-			_set_collision_shape("Platform/CollisionPolygon2D%s" % index, polygon)
-			index += 1
-		
-		# Remove extra collision polygons
-		while PlatformBody.get_child_count() > collision_shape.polygons.size():
-			var node = PlatformBody.get_children().pop_back()
-			PlatformBody.remove_child(node)
+		if generate_collisions:
+			# Generate the collision shape based on the texture bitmap
+			var collision_shape = Shapes.create_collision_polygon(Vector2.ZERO, value)
+			
+			# Update/Add collision polygons
+			var index = 1
+			for polygon in collision_shape.polygons:
+				_set_collision_shape("Platform/CollisionPolygon2D%s" % index, polygon)
+				index += 1
+			
+			# Remove extra collision polygons
+			while PlatformBody.get_child_count() > collision_shape.polygons.size():
+				var node = PlatformBody.get_children().pop_back()
+				PlatformBody.remove_child(node)
 
 
 func _set_collision_shape(path:String, polygon:PoolVector2Array, scale_up:bool = false):

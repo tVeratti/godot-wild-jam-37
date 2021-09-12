@@ -36,7 +36,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 18, 19 ),
+"times": PoolRealArray( 0, 17.6, 19.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
@@ -59,7 +59,6 @@ tracks/3/keys = {
 [node name="Sprite" parent="." index="0"]
 visible = false
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( -10, 0 )
 
 [node name="CollisionShape2D" parent="StaticBody2D" index="0"]
 disabled = true

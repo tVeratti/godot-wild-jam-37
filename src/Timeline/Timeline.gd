@@ -24,7 +24,7 @@ var state:int = States.PLAYING
 
 func _process(delta):
 	if self.playing:
-		timestamp += 1 * delta
+		timestamp += 1 * playback_speed * delta
 	timestamp = clamp(timestamp, 0, duration)
 
 
@@ -44,9 +44,12 @@ func set_timestamp(value):
 	state = States.PAUSED
 	timestamp = clamp(value, 0, duration)
 	emit_signal("timestamp_changed")
+	emit_signal("paused")
 
 
-func set_playback_speed(value):
+func toggle_playback_speed():
+	if playback_speed == 1: playback_speed = 0.25
+	else: playback_speed = 1
 	emit_signal("playback_speed_changed")
 
 
