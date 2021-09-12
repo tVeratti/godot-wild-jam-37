@@ -3,7 +3,7 @@
 [ext_resource path="res://VideoPlayer/VideoPlayer.gd" type="Script" id=1]
 [ext_resource path="res://VideoPlayer/video_player.png" type="Texture" id=2]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/Knob.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Timeline/Entity/Entity.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Video/VideoEntities.tscn" type="PackedScene" id=4]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/PlayButton.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -29,7 +29,10 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Controlss" type="MarginContainer" parent="."]
+[node name="VideoEntities" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 150.912 )
+
+[node name="Controls" type="MarginContainer" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -44,19 +47,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Controlss"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 1270.0
 margin_bottom = 710.0
 
-[node name="Spring" type="Control" parent="Controlss/VBoxContainer"]
+[node name="Spring" type="Control" parent="Controls/VBoxContainer"]
 margin_right = 1260.0
 margin_bottom = 682.0
 mouse_filter = 2
 size_flags_vertical = 3
 
-[node name="Progress" type="ProgressBar" parent="Controlss/VBoxContainer"]
+[node name="Progress" type="ProgressBar" parent="Controls/VBoxContainer"]
 margin_top = 686.0
 margin_right = 1260.0
 margin_bottom = 696.0
@@ -66,19 +69,13 @@ custom_styles/bg = SubResource( 2 )
 value = 20.0
 percent_visible = false
 
-[node name="TimelineControls" type="HBoxContainer" parent="Controlss/VBoxContainer"]
+[node name="TimelineControls" type="HBoxContainer" parent="Controls/VBoxContainer"]
 margin_top = 700.0
 margin_right = 1260.0
 margin_bottom = 700.0
 
 [node name="Video" type="Node2D" parent="."]
 position = Vector2( 0, 100 )
-
-[node name="Screen" type="Sprite" parent="Video"]
-modulate = Color( 0.164706, 0.164706, 0.164706, 1 )
-scale = Vector2( 1.5, 1 )
-texture = ExtResource( 2 )
-centered = false
 
 [node name="Timeline" type="Node2D" parent="Video"]
 position = Vector2( 20, 840 )
@@ -115,9 +112,6 @@ __meta__ = {
 position = Vector2( 20, 900 )
 
 [node name="PlayButton" parent="Video/Controls" instance=ExtResource( 6 )]
-
-[node name="Entity" parent="Video" instance=ExtResource( 4 )]
-position = Vector2( 615.361, 282.986 )
 
 [node name="Timestamp" type="Label" parent="."]
 margin_left = 28.0317

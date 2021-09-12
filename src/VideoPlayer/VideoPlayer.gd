@@ -40,7 +40,8 @@ func _on_Pause_pressed():
 func _on_Knob_pressed():
 	knob_dragging = !knob_dragging
 	if knob_dragging:
-		State.player.fixed_y = Knob.get_global_transform().origin.y
+		State.player.fixed_y = Knob.get_global_transform().origin.y - 10
 		State.player.max_x = TimelineBar.rect_position.x + TimelineBar.rect_size.x
 	else:
 		State.player.fixed_y = 0.0
+		State.player.jump()

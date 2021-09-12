@@ -67,6 +67,10 @@ func _physics_process(delta):
 	previous_on_floor = on_floor
 
 
+func jump():
+	velocity.y = JUMP_FORCE
+
+
 func _on_FallThroughTimer_timeout():
 	set_collision_mask_bit(initial_collision_layer, true)
 	set_collision_mask_bit(initial_collision_layer, true)
