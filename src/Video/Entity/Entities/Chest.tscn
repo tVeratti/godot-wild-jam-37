@@ -39,10 +39,8 @@ tracks/1/keys = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 scale = Vector2( 2.32, 2.76 )
 shape = SubResource( 1 )
-disabled = true
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
-visible = false
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]

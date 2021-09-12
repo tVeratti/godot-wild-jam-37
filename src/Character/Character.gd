@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const GRAVITY = 4000.0
 const SPEED = 400.0
-const JUMP_FORCE = GRAVITY / -9
+const JUMP_FORCE = GRAVITY / -5
 
 var velocity:Vector2 = Vector2.ZERO
 

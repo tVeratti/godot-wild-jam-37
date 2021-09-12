@@ -1,7 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://VideoPlayer/Controls/button.png" type="Texture" id=1]
 [ext_resource path="res://VideoPlayer/Controls/Button.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "action"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("PressArea/Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 2.21914, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
 
 [node name="Button" type="Node2D"]
 script = ExtResource( 2 )
@@ -9,10 +25,13 @@ script = ExtResource( 2 )
 [node name="PressArea" type="Area2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="PressArea"]
+position = Vector2( 20, 20 )
 texture = ExtResource( 1 )
-centered = false
 
 [node name="Platform" type="StaticBody2D" parent="."]
+
+[node name="ActionAnimation" type="AnimationPlayer" parent="."]
+anims/action = SubResource( 1 )
 
 [connection signal="body_entered" from="PressArea" to="." method="_on_PressArea_body_entered"]
 [connection signal="body_exited" from="PressArea" to="." method="_on_PressArea_body_exited"]

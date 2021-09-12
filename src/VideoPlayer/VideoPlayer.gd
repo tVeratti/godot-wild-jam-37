@@ -1,15 +1,27 @@
 extends Node2D
 
+export(Texture) var play_texture
+export(Texture) var pause_texture
+
 export(NodePath) var timeline_path
 onready var TimelineBar:ProgressBar = get_node(timeline_path)
 
 export(NodePath) var knob_path
 onready var Knob = get_node(knob_path)
 
+export(NodePath) var play_button_path
+onready var PlayButton = get_node(play_button_path)
+
 onready var Timestamp = $Timestamp
 onready var TimeLeft = $Video/Timeline/TimeLeft
 
 var knob_dragging:bool = false
+
+func _ready():
+	State.timeline.connect("paused", self, "_on_paused")
+	State.timeline.connect("played", self, "_on_played")
+	
+	_on_played()
 
 
 func _process(delta):
@@ -33,8 +45,12 @@ func _on_PlayButton_pressed():
 	State.timeline.play()
 
 
-func _on_Pause_pressed():
-	State.timeline.pause()
+func _on_played():
+	PlayButton.texture = pause_texture
+
+
+func _on_paused():
+	PlayButton.texture = play_texture
 
 
 func _on_Knob_pressed():
@@ -45,3 +61,6 @@ func _on_Knob_pressed():
 	else:
 		State.player.fixed_y = 0.0
 		State.player.jump()
+
+
+
