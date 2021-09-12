@@ -66,3 +66,11 @@ func _on_Knob_pressed():
 
 func _on_SpeedButton_pressed():
 	State.timeline.toggle_playback_speed()
+
+
+func _on_RewindButton_pressed():
+	State.timeline.rewind()
+
+
+func _on_ForwardButton_pressed():
+	State.timeline.forward()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://VideoPlayer/VideoPlayer.gd" type="Script" id=1]
 [ext_resource path="res://VideoPlayer/video_player.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://VideoPlayer/Controls/Buttons/SpeedButton.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Fonts/Regular.tres" type="DynamicFont" id=9]
 [ext_resource path="res://Assets/Fonts/Bold.tres" type="DynamicFont" id=10]
+[ext_resource path="res://VideoPlayer/Controls/Buttons/RewindButton.tscn" type="PackedScene" id=11]
+[ext_resource path="res://VideoPlayer/Controls/Buttons/ForwardButton.tscn" type="PackedScene" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.933333, 0.0784314, 0.0784314, 1 )
@@ -86,7 +88,7 @@ margin_bottom = 700.0
 position = Vector2( 0, 100 )
 
 [node name="Timeline" type="Node2D" parent="Video"]
-position = Vector2( 20, 840 )
+position = Vector2( 20, 820 )
 
 [node name="ProgressBar" type="ProgressBar" parent="Video/Timeline"]
 margin_right = 1830.0
@@ -120,11 +122,16 @@ __meta__ = {
 position = Vector2( 20, 900 )
 
 [node name="PlayButton" parent="Video/Controls" instance=ExtResource( 6 )]
-position = Vector2( 83, 0 )
 scale = Vector2( 1, 1 )
 
 [node name="SpeedButton" parent="Video/Controls" instance=ExtResource( 8 )]
-position = Vector2( 1650, 0 )
+position = Vector2( 1727, -5 )
+
+[node name="RewindButton" parent="Video/Controls" instance=ExtResource( 11 )]
+position = Vector2( 79, -5 )
+
+[node name="ForwardButton" parent="Video/Controls" instance=ExtResource( 12 )]
+position = Vector2( 164, -6 )
 
 [node name="Timestamp" type="Label" parent="."]
 margin_left = 28.0317
@@ -181,3 +188,5 @@ __meta__ = {
 [connection signal="pressed" from="Video/Timeline/Knob" to="." method="_on_Knob_pressed"]
 [connection signal="pressed" from="Video/Controls/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="Video/Controls/SpeedButton" to="." method="_on_SpeedButton_pressed"]
+[connection signal="pressed" from="Video/Controls/RewindButton" to="." method="_on_RewindButton_pressed"]
+[connection signal="pressed" from="Video/Controls/ForwardButton" to="." method="_on_ForwardButton_pressed"]

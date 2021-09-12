@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Video/Entity/Entities/Platform.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Entity/Entities/Platform.tscn" type="PackedScene" id=1]
 
 [sub_resource type="Animation" id=1]
 resource_name = "main"
@@ -12,7 +12,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 15.3, 16 ),
+"times": PoolRealArray( 0, 29.8, 30.5 ),
 "transitions": PoolRealArray( 1, 1, 0.34151 ),
 "update": 0,
 "values": [ Vector2( -10, 0 ), Vector2( -10, 0 ), Vector2( 0, 0 ) ]
@@ -24,7 +24,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = false
 tracks/1/keys = {
-"times": PoolRealArray( 0, 15.3, 16, 17, 17.5 ),
+"times": PoolRealArray( 0, 29.8, 30.5, 31.7, 32.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 0.450625 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1.5, 1.5, 1.5, 1 ), Color( 1.5, 1.5, 1.5, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -36,7 +36,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 15.4, 17.4 ),
+"times": PoolRealArray( 0, 29.9, 32.1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
@@ -48,7 +48,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 15.3, 17.5 ),
+"times": PoolRealArray( 0, 29.8, 32.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -60,10 +60,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 15.3, 16, 17, 17.5 ),
-"transitions": PoolRealArray( 0.4, 0.4, 0.4, 0.4 ),
+"times": PoolRealArray( 0, 29.8, 30.5, 31.7, 32.2 ),
+"transitions": PoolRealArray( 0.4, 0.4, 0.4, 0.4, 0.4 ),
 "update": 0,
-"values": [ Vector2( 0.1, 0.16 ), Vector2( 8, 0.16 ), Vector2( 8, 0.16 ), Vector2( 0.1, 0.16 ) ]
+"values": [ Vector2( 0.1, 0.16 ), Vector2( 0.1, 0.16 ), Vector2( 8, 0.16 ), Vector2( 8, 0.16 ), Vector2( 0.1, 0.16 ) ]
 }
 
 [node name="Platform" instance=ExtResource( 1 )]
@@ -71,7 +71,6 @@ tracks/4/keys = {
 [node name="Sprite" parent="." index="0"]
 visible = false
 position = Vector2( -10, 0 )
-scale = Vector2( 0.1, 0.16 )
 
 [node name="CollisionShape2D" parent="StaticBody2D" index="0"]
 disabled = true

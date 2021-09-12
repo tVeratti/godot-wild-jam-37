@@ -10,7 +10,10 @@ var _texture:Texture
 export(bool) var generate_collisions:bool = true
 
 onready var ButtonSprite:Sprite = $PressArea/Sprite
+onready var OutlineSprite:Sprite = $PressArea/Outline
+
 onready var ActionAnimation:AnimationPlayer = $ActionAnimation
+onready var HoverAnimation:AnimationPlayer = $HoverAnimation
 onready var PlatformBody:StaticBody2D = $Platform
 
 var width = 0
@@ -23,6 +26,7 @@ func _ready():
 	if _texture != null:
 		self.texture = _texture
 	
+	OutlineSprite.visible = false
 	width = ButtonSprite.texture.get_width()
 
 
@@ -71,8 +75,18 @@ func _set_collision_shape(path:String, polygon:PoolVector2Array, scale_up:bool =
 func _on_PressArea_body_entered(body):
 	if body is KinematicBody2D:
 		character_within_area = true
+		HoverAnimation.play("hover")
 
 
 func _on_PressArea_body_exited(body):
 	if body is KinematicBody2D:
+		HoverAnimation.play_backwards("hover")
 		character_within_area = false
+
+
+func _on_HoverAnimation_animation_finished(anim_name):
+	OutlineSprite.visible = character_within_area
+
+
+func _on_HoverAnimation_animation_started(anim_name):
+	OutlineSprite.visible = character_within_area

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://VideoPlayer/Controls/Button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://VideoPlayer/Assets/rewind.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Fonts/BoldSmall.tres" type="DynamicFont" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 19.7718
+
+[node name="RewindButton" instance=ExtResource( 1 )]
+texture = ExtResource( 2 )
+
+[node name="Sprite" parent="PressArea" index="0"]
+position = Vector2( 25, 23 )
+texture = ExtResource( 2 )
+
+[node name="Outline" parent="PressArea" index="1"]
+position = Vector2( 25, 25 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PressArea" index="2"]
+position = Vector2( 26.5874, 25 )
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 1 )
+
+[node name="Label" type="Label" parent="." index="4"]
+margin_left = 5.0
+margin_top = 18.0
+margin_right = 45.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 3 )
+text = "5"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

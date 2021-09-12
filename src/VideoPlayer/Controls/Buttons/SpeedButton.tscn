@@ -19,6 +19,9 @@ position = Vector2( 25, 25 )
 scale = Vector2( 3, 3 )
 shape = SubResource( 1 )
 
+[node name="Outline" parent="PressArea" index="2"]
+position = Vector2( 25, 25 )
+
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Platform" index="0"]
 position = Vector2( 25, 25 )
 scale = Vector2( 2.6, 2.6 )

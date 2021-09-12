@@ -8,6 +8,7 @@ signal paused()
 signal timestamp_changed()
 signal playback_speed_changed()
 
+const JUMP_SECONDS = 5
 
 var entities:Array = []
 
@@ -34,6 +35,14 @@ func play():
 
 func pause():
 	_toggle_play()
+
+
+func rewind():
+	set_timestamp(timestamp - JUMP_SECONDS)
+
+
+func forward():
+	set_timestamp(timestamp + JUMP_SECONDS)
 
 
 func set_progress(value):
