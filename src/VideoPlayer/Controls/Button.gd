@@ -12,6 +12,8 @@ export(bool) var generate_collisions:bool = true
 onready var ButtonSprite:Sprite = $PressArea/Sprite
 onready var OutlineSprite:Sprite = $PressArea/Outline
 
+onready var ClickSound:AudioStreamPlayer = $ClickSound
+
 onready var ActionAnimation:AnimationPlayer = $ActionAnimation
 onready var HoverAnimation:AnimationPlayer = $HoverAnimation
 onready var PlatformBody:StaticBody2D = $Platform
@@ -32,6 +34,7 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("action") and character_within_area:
+		ClickSound.play()
 		ActionAnimation.play("action")
 		emit_signal("pressed")
 

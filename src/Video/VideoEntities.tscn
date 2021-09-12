@@ -1,16 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Entity/Entities/Key.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Video/VideoEntities.gd" type="Script" id=2]
 [ext_resource path="res://VideoPlayer/video_player.png" type="Texture" id=3]
 [ext_resource path="res://Entity/Entities/Chest.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Entity/Platforms/Platform1.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Entity/Platforms/Platform2.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Entity/Platforms/Platform3.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Entity/Platforms/Platform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Entity/Entities/Background.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Entity/Platforms/Platform4.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Entity/Platforms/Platform5.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Entity/Entity.gd" type="Script" id=11]
 
 [node name="VideoEntities" type="Node2D"]
 script = ExtResource( 2 )
@@ -31,30 +26,17 @@ position = Vector2( 1606.17, 141.291 )
 
 [node name="Platforms" type="Node2D" parent="."]
 
-[node name="Platform1" parent="Platforms" instance=ExtResource( 5 )]
-modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 1598.16, 367.716 )
-script = ExtResource( 11 )
+[node name="Platform_02_05" parent="Platforms" instance=ExtResource( 5 )]
+position = Vector2( 244, 622 )
+enter_timestamp = 2.0
+exit_timestamp = 5.0
 
-[node name="Platform2" parent="Platforms" instance=ExtResource( 6 )]
-modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 1357.09, 476.146 )
-script = ExtResource( 11 )
-
-[node name="Platform3" parent="Platforms" instance=ExtResource( 7 )]
-modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 1133.64, 609.492 )
-script = ExtResource( 11 )
-
-[node name="Platform4" parent="Platforms" instance=ExtResource( 10 )]
-modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 372.936, 352.109 )
-script = ExtResource( 11 )
-
-[node name="Platform5" parent="Platforms" instance=ExtResource( 9 )]
-modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 372.628, 518.855 )
-script = ExtResource( 11 )
+[node name="Platform" parent="Platforms" instance=ExtResource( 5 )]
+position = Vector2( 626, 634 )
+enter_timestamp = 5.0
+exit_timestamp = 6.0
+spin = true
 
 [connection signal="enter" from="Key" to="." method="_on_Key_enter"]
 [connection signal="action" from="Chest" to="." method="_on_Chest_action"]
+[connection signal="enter" from="Chest" to="." method="_on_Chest_enter"]

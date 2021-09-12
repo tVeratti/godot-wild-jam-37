@@ -1,9 +1,13 @@
 extends Node2D
 
+class_name Entity
+
+const MAIN_ANIMATION_NAME = "main"
+
 signal action()
 signal enter()
 
-onready var VideoAnimations = $AnimationPlayer
+onready var VideoAnimations:AnimationPlayer = $AnimationPlayer
 var EntitySprite:Sprite
 
 
@@ -14,13 +18,14 @@ func _ready():
 	if has_node("Sprite"):
 		EntitySprite = $Sprite
 	
-	if is_instance_valid(VideoAnimations):
-		VideoAnimations.play("main")
+	if is_instance_valid(VideoAnimations) and VideoAnimations.has_animation(MAIN_ANIMATION_NAME):
+		VideoAnimations.play(MAIN_ANIMATION_NAME)
 
 
 func _process(delta):
 	if is_instance_valid(VideoAnimations):
-		VideoAnimations.seek(State.timeline.timestamp, true)
+		if VideoAnimations.is_playing():
+			VideoAnimations.seek(State.timeline.timestamp, true)
 		
 	if Input.is_action_just_pressed("action") and player_within:
 		emit_signal("action")

@@ -9,6 +9,6 @@ func _on_Key_enter():
 	$Key.destroy()
 
 
-func _on_Chest_action():
+func _on_Chest_enter():
 	if key:
 		$Chest.destroy()
