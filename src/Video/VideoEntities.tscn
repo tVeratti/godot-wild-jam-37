@@ -32,22 +32,27 @@ position = Vector2( 1622.17, 239.291 )
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="Platform1" parent="Platforms" instance=ExtResource( 5 )]
+modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 1598.16, 367.716 )
 script = ExtResource( 11 )
 
 [node name="Platform2" parent="Platforms" instance=ExtResource( 6 )]
+modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 1357.09, 476.146 )
 script = ExtResource( 11 )
 
 [node name="Platform3" parent="Platforms" instance=ExtResource( 7 )]
+modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 1133.64, 609.492 )
 script = ExtResource( 11 )
 
 [node name="Platform4" parent="Platforms" instance=ExtResource( 10 )]
+modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 372.936, 352.109 )
 script = ExtResource( 11 )
 
 [node name="Platform5" parent="Platforms" instance=ExtResource( 9 )]
+modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 372.628, 518.855 )
 script = ExtResource( 11 )
 

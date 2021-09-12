@@ -16,7 +16,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 9.3, 20.9, 100 ),
+"times": PoolRealArray( 0, 14.8, 20.9, 100 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true, true ]
@@ -28,10 +28,22 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 9.4, 20.9, 99.9 ),
+"times": PoolRealArray( 0, 14.8, 20.9, 99.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 14.8, 15.2, 15.5, 20.3, 20.9 ),
+"transitions": PoolRealArray( 1, 0.4, 0.4, 0.4, 0.4, 0.4 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ), Vector2( 0.1, 0.1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.1, 0.1 ) ]
 }
 
 [node name="Chest" instance=ExtResource( 1 )]
@@ -39,8 +51,11 @@ tracks/1/keys = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 scale = Vector2( 2.32, 2.76 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
+visible = false
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]

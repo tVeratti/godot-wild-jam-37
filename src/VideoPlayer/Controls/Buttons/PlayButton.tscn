@@ -4,6 +4,7 @@
 [ext_resource path="res://VideoPlayer/Assets/forward.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13.5013, 14.0443 )
 
 [node name="Button" instance=ExtResource( 1 )]
 scale = Vector2( 1.2, 1.2 )

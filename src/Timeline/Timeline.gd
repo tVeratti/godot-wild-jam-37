@@ -12,7 +12,7 @@ signal playback_speed_changed()
 var entities:Array = []
 
 var timestamp:float = 0.0
-var duration:float = 100.0
+var duration:float = 40.0
 var playback_speed:float = 1.0
 
 var progress:float = 0.0 setget , _get_progress

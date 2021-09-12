@@ -5,7 +5,6 @@ static func create_collision_polygon(position:Vector2, texture:Texture):
 	var bitmap = BitMap.new()
 	bitmap.create_from_image_alpha(texture.get_data())
 	
-	print(texture.get_width())
 	var rect = Rect2(position.x, position.y, texture.get_width(), texture.get_height())
 	var points = bitmap.opaque_to_polygons(rect)
 	var polygon = Polygon2D.new()
