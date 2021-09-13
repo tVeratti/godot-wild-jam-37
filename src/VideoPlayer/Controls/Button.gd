@@ -41,6 +41,7 @@ func _process(delta):
 
 func _set_texture(value):
 	_texture = value
+	
 	if is_instance_valid(ButtonSprite):
 		ButtonSprite.texture = value
 		

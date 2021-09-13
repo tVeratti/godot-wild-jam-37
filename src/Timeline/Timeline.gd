@@ -10,7 +10,6 @@ signal playback_speed_changed()
 
 const JUMP_SECONDS = 5
 
-var entities:Array = []
 
 var timestamp:float = 0.0
 var duration:float = 40.0
@@ -20,14 +19,17 @@ var progress:float = 0.0 setget , _get_progress
 var playing:bool setget , _get_playing
 
 enum States { PLAYING, PAUSED }
-var state:int = States.PLAYING
+var state:int = States.PAUSED
+
+func _ready():
+	State.connect("video_changed", self, "_on_video_changed")
 
 
 func _process(delta):
 	if self.playing:
 		timestamp += 1 * playback_speed * delta
 	timestamp = clamp(timestamp, 0, duration)
-
+	
 
 func play():
 	_toggle_play()
@@ -77,3 +79,8 @@ func _get_progress():
 
 func _get_playing():
 	return state == States.PLAYING
+
+
+func _on_video_changed(video):
+	duration = video.duration
+	set_timestamp(0.0)

@@ -1,4 +1,4 @@
-extends Node2D
+extends Episode
 
 
 var key:bool = false
@@ -12,3 +12,4 @@ func _on_Key_enter():
 func _on_Chest_enter():
 	if key:
 		$Chest.destroy()
+		complete = true

@@ -1,9 +1,7 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://VideoPlayer/VideoPlayer.gd" type="Script" id=1]
-[ext_resource path="res://VideoPlayer/video_player.png" type="Texture" id=2]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/Knob.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Video/VideoEntities.tscn" type="PackedScene" id=4]
 [ext_resource path="res://VideoPlayer/Assets/forward.png" type="Texture" id=5]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/PlayButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://VideoPlayer/Assets/pause.png" type="Texture" id=7]
@@ -12,12 +10,7 @@
 [ext_resource path="res://Assets/Fonts/Bold.tres" type="DynamicFont" id=10]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/RewindButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/ForwardButton.tscn" type="PackedScene" id=12]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.933333, 0.0784314, 0.0784314, 1 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 1, 1, 1, 0.392157 )
+[ext_resource path="res://VideoPlayer/Controls/Buttons/NextButton.tscn" type="PackedScene" id=13]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 1, 1, 1 )
@@ -33,56 +26,27 @@ timeline_path = NodePath("Video/Timeline/ProgressBar")
 knob_path = NodePath("Video/Timeline/Knob")
 play_button_path = NodePath("Video/Controls/PlayButton")
 
-[node name="Background" type="Sprite" parent="."]
-modulate = Color( 0, 0, 0, 1 )
-scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 2 )
-centered = false
-
-[node name="VideoEntities" parent="." instance=ExtResource( 4 )]
-position = Vector2( 0, 150.912 )
-
-[node name="Controls" type="MarginContainer" parent="."]
-visible = false
+[node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1280.0
-margin_bottom = 720.0
-mouse_filter = 2
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0.109804, 0.109804, 0.109804, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 1270.0
-margin_bottom = 710.0
-
-[node name="Spring" type="Control" parent="Controls/VBoxContainer"]
-margin_right = 1260.0
-margin_bottom = 682.0
-mouse_filter = 2
-size_flags_vertical = 3
-
-[node name="Progress" type="ProgressBar" parent="Controls/VBoxContainer"]
-margin_top = 686.0
-margin_right = 1260.0
-margin_bottom = 696.0
-rect_min_size = Vector2( 0, 10 )
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
-value = 20.0
-percent_visible = false
-
-[node name="TimelineControls" type="HBoxContainer" parent="Controls/VBoxContainer"]
-margin_top = 700.0
-margin_right = 1260.0
-margin_bottom = 700.0
+[node name="Timestamp" type="Label" parent="."]
+margin_left = 28.0317
+margin_top = 65.4072
+margin_right = 72.0317
+margin_bottom = 144.407
+custom_fonts/font = ExtResource( 9 )
+text = "0.0
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Video" type="Node2D" parent="."]
 position = Vector2( 0, 100 )
@@ -122,31 +86,29 @@ __meta__ = {
 position = Vector2( 20, 900 )
 
 [node name="PlayButton" parent="Video/Controls" instance=ExtResource( 6 )]
+position = Vector2( 6, 0 )
 scale = Vector2( 1, 1 )
 
 [node name="SpeedButton" parent="Video/Controls" instance=ExtResource( 8 )]
 position = Vector2( 1727, -5 )
 
 [node name="RewindButton" parent="Video/Controls" instance=ExtResource( 11 )]
-position = Vector2( 79, -5 )
+position = Vector2( 95, -5 )
 
 [node name="ForwardButton" parent="Video/Controls" instance=ExtResource( 12 )]
-position = Vector2( 164, -6 )
+position = Vector2( 191, -5 )
 
-[node name="Timestamp" type="Label" parent="."]
-margin_left = 28.0317
-margin_top = 65.4072
-margin_right = 68.0317
-margin_bottom = 96.4072
-custom_fonts/font = ExtResource( 9 )
-text = "0.0
-"
+[node name="NextButton" parent="Video/Controls" instance=ExtResource( 13 )]
+position = Vector2( 1641, 0 )
+
+[node name="Labels" type="Control" parent="."]
+margin_left = 565.114
+margin_top = 996.887
+margin_right = 565.114
+margin_bottom = 996.887
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Labels" type="Node2D" parent="."]
-position = Vector2( 617.361, 999.117 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Labels"]
 margin_right = 40.0
@@ -172,9 +134,9 @@ margin_top = 1.0
 margin_right = 347.0
 margin_bottom = 39.0
 custom_fonts/font = ExtResource( 9 )
-text = "S1:E37"
+text = "S36:E1"
 
-[node name="Subtitle" type="Label" parent="Labels/HBoxContainer"]
+[node name="Episode" type="Label" parent="Labels/HBoxContainer"]
 margin_left = 367.0
 margin_top = 1.0
 margin_right = 638.0
@@ -190,3 +152,4 @@ __meta__ = {
 [connection signal="pressed" from="Video/Controls/SpeedButton" to="." method="_on_SpeedButton_pressed"]
 [connection signal="pressed" from="Video/Controls/RewindButton" to="." method="_on_RewindButton_pressed"]
 [connection signal="pressed" from="Video/Controls/ForwardButton" to="." method="_on_ForwardButton_pressed"]
+[connection signal="pressed" from="Video/Controls/NextButton" to="." method="_on_NextButton_pressed"]
