@@ -11,5 +11,7 @@
 scale = Vector2( 3, 3 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="." index="2"]
+[node name="Sprite" type="Sprite" parent="." index="1"]
 texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://VideoPlayer/video_player.png" type="Texture" id=1]
-[ext_resource path="res://Entity/Entities/Chest.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Entity/Entities/KeyHoleEntity.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Entity/Entities/KeyEntity.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Entity/Entities/Background.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Entity/Platforms/Platform.tscn" type="PackedScene" id=5]
@@ -22,8 +22,8 @@ centered = false
 [node name="Key" parent="." instance=ExtResource( 3 )]
 position = Vector2( 378.896, 206.598 )
 
-[node name="Chest" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1606.17, 141.291 )
+[node name="KeyHoleEntity" parent="." instance=ExtResource( 2 )]
+position = Vector2( 940, 282 )
 
 [node name="Platforms" type="Node2D" parent="."]
 
@@ -39,5 +39,4 @@ exit_timestamp = 6.0
 spin = true
 
 [connection signal="enter" from="Key" to="." method="_on_Key_enter"]
-[connection signal="action" from="Chest" to="." method="_on_Chest_action"]
-[connection signal="enter" from="Chest" to="." method="_on_Chest_enter"]
+[connection signal="enter" from="KeyHoleEntity" to="." method="_on_KeyHoleEntity_enter"]

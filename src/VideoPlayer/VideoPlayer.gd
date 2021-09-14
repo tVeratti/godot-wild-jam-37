@@ -15,10 +15,12 @@ onready var PlayButton = get_node(play_button_path)
 
 onready var Timestamp = $Timestamp
 onready var TimeLeft = $Video/Timeline/TimeLeft
+onready var TimelineNode = $Video/Timeline
+onready var VideoEntities:Node2D = $VideoEntities
 
-onready var Title:Label = $Labels/HBoxContainer/Title
-onready var Number:Label = $Labels/HBoxContainer/Number
-onready var Episode:Label = $Labels/HBoxContainer/Episode
+onready var Title:Label = $Video/Timeline/Labels/HBoxContainer/Title
+onready var Number:Label = $Video/Timeline/Labels/HBoxContainer/Number
+onready var Episode:Label = $Video/Timeline/Labels/HBoxContainer/Episode
 
 var current_video
 
@@ -32,6 +34,8 @@ func _ready():
 	State.timeline.connect("played", self, "_on_played")
 	State.connect("video_changed", self, "_on_video_changed")
 	
+	get_tree().get_root().connect("size_changed", self, "_on_size_changed")
+	
 	_on_played()
 	
 	State.next()
@@ -43,7 +47,7 @@ func _process(delta):
 	var knob_width = Knob.width
 
 	if knob_dragging:
-		var player_progress = State.player.position.x / bar_width
+		var player_progress = (State.player.position.x - TimelineNode.position.x) / bar_width
 		State.timeline.set_progress(player_progress)
 	
 	var progress = State.timeline.progress 
@@ -61,10 +65,18 @@ func set_video(path):
 	
 	var Episode = load("res://Videos/%s/%s.tscn" % [path, path])
 	current_video = Episode.instance()
-	current_video.position.y = 150
 	current_video.visible = false
-	add_child(current_video)
+	VideoEntities.add_child(current_video)
 	State.emit_signal("video_changed", current_video)
+	
+	update_positions()
+
+
+func update_positions():
+	var size = OS.get_window_size()
+	
+	var video_position = (size.y - 720) / 2
+	VideoEntities.position.y = video_position
 
 
 func _on_PlayButton_pressed():
@@ -109,3 +121,7 @@ func _on_NextButton_pressed():
 func _on_video_changed(video):
 	Number.text = "S36:%s" % video.name
 	Episode.text = video.episode
+
+
+func _on_size_changed():
+	update_positions()

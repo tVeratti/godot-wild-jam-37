@@ -10,10 +10,12 @@ var velocity:Vector2 = Vector2.ZERO
 var fixed_y:float = 0.0
 var max_x:float = 0.0
 var previous_on_floor:bool = false
+var facing_right:bool = true
 
 onready var JumpBoostTimer:Timer = $JumpBoostTimer
 onready var JumpFallTimer:Timer = $JumpFallTimer
 onready var FallThroughTimer:Timer = $FallThroughTimer
+onready var MySprite:AnimatedSprite = $AnimatedSprite
 
 var initial_collision_layer = 0
 
@@ -33,11 +35,17 @@ func _physics_process(delta):
 	var speed = SPEED
 	if Input.is_action_pressed("sprint"):
 		speed = SPEED_SPRINT
-	
+		
 	if Input.is_action_pressed("left"):
-		 velocity.x = -speed
+		velocity.x = -speed
+		facing_right = false
+		MySprite.play("walk_left")
 	elif Input.is_action_pressed("right"):
 		velocity.x = speed
+		facing_right = true
+		MySprite.play("walk_right")
+	else:
+		MySprite.play("idle_right" if facing_right else "idle_left")
 	
 	if Input.is_action_just_pressed("down"):
 		if not FallThroughTimer.time_left > 0:

@@ -12,10 +12,10 @@
 [ext_resource path="res://VideoPlayer/Controls/Buttons/ForwardButton.tscn" type="PackedScene" id=12]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/NextButton.tscn" type="PackedScene" id=13]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 0.235294 )
 
 [node name="VideoPlayer" type="Node2D"]
@@ -24,7 +24,7 @@ play_texture = ExtResource( 5 )
 pause_texture = ExtResource( 7 )
 timeline_path = NodePath("Video/Timeline/ProgressBar")
 knob_path = NodePath("Video/Timeline/Knob")
-play_button_path = NodePath("Video/Controls/PlayButton")
+play_button_path = NodePath("Video/Timeline/Controls/PlayButton")
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -48,17 +48,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="VideoEntities" type="Node2D" parent="."]
+position = Vector2( 0, 180 )
+
 [node name="Video" type="Node2D" parent="."]
-position = Vector2( 0, 100 )
 
 [node name="Timeline" type="Node2D" parent="Video"]
-position = Vector2( 20, 820 )
+position = Vector2( 136, 820 )
 
 [node name="ProgressBar" type="ProgressBar" parent="Video/Timeline"]
-margin_right = 1830.0
-margin_bottom = 10.0
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = SubResource( 4 )
+margin_top = 0.063
+margin_right = 1660.0
+margin_bottom = 10.063
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -67,50 +70,50 @@ __meta__ = {
 [node name="StaticBody2D" type="StaticBody2D" parent="Video/Timeline/ProgressBar"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Video/Timeline/ProgressBar/StaticBody2D"]
-polygon = PoolVector2Array( 1828.86, -0.703369, 1828.86, 9.19617, 1.69622, 10.6104, 2.40333, 0.00378418 )
+polygon = PoolVector2Array( 1660, -0.703, 1660, 9.196, 0, 10.61, 0, 0.004 )
 one_way_collision = true
 
 [node name="Knob" parent="Video/Timeline" instance=ExtResource( 3 )]
-position = Vector2( 0, -15 )
+position = Vector2( 10, -15.937 )
 
 [node name="TimeLeft" type="Label" parent="Video/Timeline"]
-margin_left = 1838.07
+margin_left = 1711.08
 margin_top = -2.66968
-margin_right = 1878.07
+margin_right = 1751.08
 margin_bottom = 11.3303
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Controls" type="Node2D" parent="Video"]
-position = Vector2( 20, 900 )
+[node name="Controls" type="Node2D" parent="Video/Timeline"]
+position = Vector2( 0, 92.063 )
 
-[node name="PlayButton" parent="Video/Controls" instance=ExtResource( 6 )]
-position = Vector2( 6, 0 )
+[node name="PlayButton" parent="Video/Timeline/Controls" instance=ExtResource( 6 )]
+position = Vector2( 0, 4 )
 scale = Vector2( 1, 1 )
 
-[node name="SpeedButton" parent="Video/Controls" instance=ExtResource( 8 )]
-position = Vector2( 1727, -5 )
+[node name="RewindButton" parent="Video/Timeline/Controls" instance=ExtResource( 11 )]
+position = Vector2( 100.376, 0 )
 
-[node name="RewindButton" parent="Video/Controls" instance=ExtResource( 11 )]
-position = Vector2( 95, -5 )
+[node name="ForwardButton" parent="Video/Timeline/Controls" instance=ExtResource( 12 )]
+position = Vector2( 193.376, 0 )
 
-[node name="ForwardButton" parent="Video/Controls" instance=ExtResource( 12 )]
-position = Vector2( 191, -5 )
+[node name="NextButton" parent="Video/Timeline/Controls" instance=ExtResource( 13 )]
+position = Vector2( 1499.37, 0 )
 
-[node name="NextButton" parent="Video/Controls" instance=ExtResource( 13 )]
-position = Vector2( 1641, 0 )
+[node name="SpeedButton" parent="Video/Timeline/Controls" instance=ExtResource( 8 )]
+position = Vector2( 1585.37, -5 )
 
-[node name="Labels" type="Control" parent="."]
-margin_left = 565.114
-margin_top = 996.887
-margin_right = 565.114
-margin_bottom = 996.887
+[node name="Labels" type="Control" parent="Video/Timeline"]
+margin_left = 488.0
+margin_top = 96.0
+margin_right = 488.0
+margin_bottom = 96.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Labels"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Video/Timeline/Labels"]
 margin_right = 40.0
 margin_bottom = 40.0
 custom_constants/separation = 20
@@ -118,7 +121,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="Labels/HBoxContainer"]
+[node name="Title" type="Label" parent="Video/Timeline/Labels/HBoxContainer"]
 margin_top = 1.0
 margin_right = 228.0
 margin_bottom = 39.0
@@ -128,7 +131,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Number" type="Label" parent="Labels/HBoxContainer"]
+[node name="Number" type="Label" parent="Video/Timeline/Labels/HBoxContainer"]
 margin_left = 248.0
 margin_top = 1.0
 margin_right = 347.0
@@ -136,7 +139,7 @@ margin_bottom = 39.0
 custom_fonts/font = ExtResource( 9 )
 text = "S36:E1"
 
-[node name="Episode" type="Label" parent="Labels/HBoxContainer"]
+[node name="Episode" type="Label" parent="Video/Timeline/Labels/HBoxContainer"]
 margin_left = 367.0
 margin_top = 1.0
 margin_right = 638.0
@@ -148,8 +151,8 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="Video/Timeline/Knob" to="." method="_on_Knob_pressed"]
-[connection signal="pressed" from="Video/Controls/PlayButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="Video/Controls/SpeedButton" to="." method="_on_SpeedButton_pressed"]
-[connection signal="pressed" from="Video/Controls/RewindButton" to="." method="_on_RewindButton_pressed"]
-[connection signal="pressed" from="Video/Controls/ForwardButton" to="." method="_on_ForwardButton_pressed"]
-[connection signal="pressed" from="Video/Controls/NextButton" to="." method="_on_NextButton_pressed"]
+[connection signal="pressed" from="Video/Timeline/Controls/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Video/Timeline/Controls/RewindButton" to="." method="_on_RewindButton_pressed"]
+[connection signal="pressed" from="Video/Timeline/Controls/ForwardButton" to="." method="_on_ForwardButton_pressed"]
+[connection signal="pressed" from="Video/Timeline/Controls/NextButton" to="." method="_on_NextButton_pressed"]
+[connection signal="pressed" from="Video/Timeline/Controls/SpeedButton" to="." method="_on_SpeedButton_pressed"]
