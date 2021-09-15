@@ -1,14 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://VideoPlayer/video_player.png" type="Texture" id=1]
-[ext_resource path="res://Entity/Entities/KeyHoleEntity.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Entity/Entities/KeyEntity.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entity/Assets/key.png" type="Texture" id=2]
+[ext_resource path="res://Entity/Yoink/Yoink.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Entity/Entities/Background.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Entity/Platforms/Platform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Videos/E02/E02.gd" type="Script" id=6]
+[ext_resource path="res://Entity/Assets/keyhole.png" type="Texture" id=7]
 
 [node name="E02" type="Node2D"]
 script = ExtResource( 6 )
+duration = 20.0
 episode = "Baby Steps"
 
 [node name="Background" type="Sprite" parent="."]
@@ -19,24 +21,45 @@ centered = false
 
 [node name="VideoBG" parent="." instance=ExtResource( 4 )]
 
-[node name="Key" parent="." instance=ExtResource( 3 )]
-position = Vector2( 378.896, 206.598 )
-
-[node name="KeyHoleEntity" parent="." instance=ExtResource( 2 )]
-position = Vector2( 940, 282 )
-
 [node name="Platforms" type="Node2D" parent="."]
+position = Vector2( 124, 434 )
 
-[node name="Platform_02_05" parent="Platforms" instance=ExtResource( 5 )]
-position = Vector2( 244, 622 )
+[node name="Platform_2_10" parent="Platforms" instance=ExtResource( 5 )]
+position = Vector2( 0, 0 )
+duration = 25.0
 enter_timestamp = 2.0
-exit_timestamp = 5.0
+exit_timestamp = 10.0
 
-[node name="Platform" parent="Platforms" instance=ExtResource( 5 )]
-position = Vector2( 626, 634 )
+[node name="Platform_3_10" parent="Platforms" instance=ExtResource( 5 )]
+position = Vector2( 364, -50 )
+duration = 25.0
+enter_timestamp = 3.0
+exit_timestamp = 10.0
+size = 200.0
+
+[node name="Platform_4_10" parent="Platforms" instance=ExtResource( 5 )]
+position = Vector2( 768, -100 )
+duration = 25.0
+enter_timestamp = 4.0
+exit_timestamp = 10.0
+
+[node name="Platform_5_10" parent="Platforms" instance=ExtResource( 5 )]
+position = Vector2( 1176, -150 )
+duration = 25.0
 enter_timestamp = 5.0
-exit_timestamp = 6.0
-spin = true
+exit_timestamp = 10.0
+
+[node name="Key" parent="." instance=ExtResource( 3 )]
+position = Vector2( 252, 264 )
+sprite_texture = ExtResource( 2 )
+enter_timestamp = 3.0
+exit_timestamp = 9.0
+
+[node name="KeyHole" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1454, 124 )
+sprite_texture = ExtResource( 7 )
+enter_timestamp = 6.0
+exit_timestamp = 9.0
 
 [connection signal="enter" from="Key" to="." method="_on_Key_enter"]
-[connection signal="enter" from="KeyHoleEntity" to="." method="_on_KeyHoleEntity_enter"]
+[connection signal="enter" from="KeyHole" to="." method="_on_KeyHole_enter"]

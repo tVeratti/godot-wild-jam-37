@@ -19,7 +19,7 @@ var progress:float = 0.0 setget , _get_progress
 var playing:bool setget , _get_playing
 
 enum States { PLAYING, PAUSED }
-var state:int = States.PAUSED
+var state:int = States.PLAYING
 
 func _ready():
 	State.connect("video_changed", self, "_on_video_changed")
@@ -29,7 +29,7 @@ func _process(delta):
 	if self.playing:
 		timestamp += 1 * playback_speed * delta
 	timestamp = clamp(timestamp, 0, duration)
-	
+
 
 func play():
 	_toggle_play()
@@ -84,3 +84,4 @@ func _get_playing():
 func _on_video_changed(video):
 	duration = video.duration
 	set_timestamp(0.0)
+	play()

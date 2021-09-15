@@ -8,6 +8,7 @@
 radius = 19.7718
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 11.0956, 10 )
 
 [node name="RewindButton" instance=ExtResource( 1 )]
 texture = ExtResource( 2 )
@@ -26,8 +27,8 @@ scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform" index="0"]
-position = Vector2( 24.4047, 17.063 )
-scale = Vector2( 1.76, 1 )
+position = Vector2( 24.7384, 14.8939 )
+scale = Vector2( 1.81497, 0.843406 )
 shape = SubResource( 2 )
 one_way_collision = true
 one_way_collision_margin = 2.0

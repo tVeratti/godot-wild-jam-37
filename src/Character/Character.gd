@@ -9,6 +9,7 @@ var velocity:Vector2 = Vector2.ZERO
 
 var fixed_y:float = 0.0
 var max_x:float = 0.0
+var min_x:float = 0.0
 var previous_on_floor:bool = false
 var facing_right:bool = true
 
@@ -26,6 +27,7 @@ func _ready():
 func _physics_process(delta):
 	var on_floor = is_on_floor()
 	var attached = fixed_y != 0
+	var sprite_animation = "idle" if on_floor else "fall"
 	
 	# Give the player a little extra time to register
 	# a jump when they are falling off of a platform edge.
@@ -39,13 +41,11 @@ func _physics_process(delta):
 	if Input.is_action_pressed("left"):
 		velocity.x = -speed
 		facing_right = false
-		MySprite.play("walk_left")
+		if on_floor: sprite_animation = "walk"
 	elif Input.is_action_pressed("right"):
 		velocity.x = speed
 		facing_right = true
-		MySprite.play("walk_right")
-	else:
-		MySprite.play("idle_right" if facing_right else "idle_left")
+		if on_floor: sprite_animation = "walk"
 	
 	if Input.is_action_just_pressed("down"):
 		if not FallThroughTimer.time_left > 0:
@@ -63,8 +63,8 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	# If the user is grabbing the timeline, don't let them exceed it
-	if max_x != 0.0 and position.x > max_x:
-		position.x = max_x
+	if max_x != 0.0:
+		position.x = clamp(position.x, min_x, max_x)
 	
 	# Simulate a bit of friction to slow the velocity down.
 	if on_floor or attached: velocity.x = lerp(velocity.x, 0, 0.8)
@@ -74,10 +74,14 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and (on_floor or JumpFallTimer.time_left > 0):
 		JumpBoostTimer.start()
 		velocity.y = JUMP_FORCE
+		sprite_animation = "jump"
 	elif Input.is_action_pressed("jump") and JumpBoostTimer.time_left > 0:
 		velocity.y = JUMP_FORCE
+		sprite_animation = "jump"
 	
 	previous_on_floor = on_floor
+	MySprite.flip_h = !facing_right
+	MySprite.play(sprite_animation)
 
 
 func jump():

@@ -8,5 +8,8 @@ export(String) var episode:String = "Inside the Machine"
 
 
 func _ready():
-	yield(get_tree().create_timer(1), "timeout")
+	if has_node("FadeIn"):
+		$FadeIn.visible = true
+	
+	yield(get_tree().create_timer(0.1), "timeout")
 	visible = true

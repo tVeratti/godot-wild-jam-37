@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://VideoPlayer/Controls/Button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://VideoPlayer/Assets/forward.png" type="Texture" id=2]
@@ -6,8 +6,12 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.5013, 14.0443 )
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9.72428, 10 )
+
 [node name="Button" instance=ExtResource( 1 )]
 scale = Vector2( 1.2, 1.2 )
+generate_collisions = false
 
 [node name="Sprite" parent="PressArea" index="0"]
 texture = ExtResource( 2 )
@@ -20,7 +24,9 @@ shape = SubResource( 1 )
 [node name="Platform" parent="." index="1"]
 position = Vector2( -5, -5 )
 
-[node name="CollisionPolygon2D1" type="CollisionPolygon2D" parent="Platform" index="0"]
-scale = Vector2( 1.2, 1.2 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform" index="0"]
+position = Vector2( 24.8766, 17.063 )
+scale = Vector2( 1.76, 1 )
+shape = SubResource( 2 )
 one_way_collision = true
 one_way_collision_margin = 2.0

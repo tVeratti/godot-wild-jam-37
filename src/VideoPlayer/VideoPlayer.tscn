@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://VideoPlayer/VideoPlayer.gd" type="Script" id=1]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/Knob.tscn" type="PackedScene" id=3]
@@ -17,6 +17,11 @@ bg_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 0.235294 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 334.32, 10 )
+
+[sub_resource type="RectangleShape2D" id=4]
 
 [node name="VideoPlayer" type="Node2D"]
 script = ExtResource( 1 )
@@ -54,7 +59,7 @@ position = Vector2( 0, 180 )
 [node name="Video" type="Node2D" parent="."]
 
 [node name="Timeline" type="Node2D" parent="Video"]
-position = Vector2( 136, 820 )
+position = Vector2( 136, 850 )
 
 [node name="ProgressBar" type="ProgressBar" parent="Video/Timeline"]
 margin_top = 0.063
@@ -77,16 +82,16 @@ one_way_collision = true
 position = Vector2( 10, -15.937 )
 
 [node name="TimeLeft" type="Label" parent="Video/Timeline"]
-margin_left = 1711.08
-margin_top = -2.66968
-margin_right = 1751.08
-margin_bottom = 11.3303
+margin_left = 1684.62
+margin_top = -3.92969
+margin_right = 1724.62
+margin_bottom = 10.0703
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Controls" type="Node2D" parent="Video/Timeline"]
-position = Vector2( 0, 92.063 )
+position = Vector2( 0, 109.063 )
 
 [node name="PlayButton" parent="Video/Timeline/Controls" instance=ExtResource( 6 )]
 position = Vector2( 0, 4 )
@@ -105,10 +110,10 @@ position = Vector2( 1499.37, 0 )
 position = Vector2( 1585.37, -5 )
 
 [node name="Labels" type="Control" parent="Video/Timeline"]
-margin_left = 488.0
-margin_top = 96.0
-margin_right = 488.0
-margin_bottom = 96.0
+margin_left = 489.782
+margin_top = 104.909
+margin_right = 489.782
+margin_bottom = 104.909
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -149,6 +154,51 @@ text = "Inside the Machine"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Video/Timeline/Labels"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Video/Timeline/Labels/StaticBody2D"]
+position = Vector2( 318.76, 20.1586 )
+shape = SubResource( 3 )
+one_way_collision = true
+
+[node name="Boundaries" type="Node" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( 974.303, 1099.57 )
+scale = Vector2( 100, 3.32 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Ground"]
+shape = SubResource( 4 )
+
+[node name="Ceiling" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( 957.485, -17.1395 )
+scale = Vector2( 100, 3.32 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Ceiling"]
+shape = SubResource( 4 )
+
+[node name="Wall" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( -3.77478, 551.223 )
+scale = Vector2( 1, 60 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Wall"]
+shape = SubResource( 4 )
+
+[node name="Wall2" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( 1923.61, 554.998 )
+scale = Vector2( 1, 60 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Wall2"]
+shape = SubResource( 4 )
 
 [connection signal="pressed" from="Video/Timeline/Knob" to="." method="_on_Knob_pressed"]
 [connection signal="pressed" from="Video/Timeline/Controls/PlayButton" to="." method="_on_PlayButton_pressed"]

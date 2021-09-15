@@ -8,24 +8,27 @@ signal enter()
 
 
 const MAIN_ANIMATION_NAME = "main"
-const TRANSITION_TIME:float = 0.3
+const TRANSITION_TIME:float = 0.5
 const TRANSITION_CURVE:float = 0.4
 
 const SMALL_SCALE:Vector2 = Vector2(0.1, 0.1)
-const FULL_SCALE:Vector2 = Vector2(8, 0.1)
+const FULL_SCALE:Vector2 = Vector2(1, 1)
 const SPIN_DEGREES:float = 360.0 * 4
 
 export(bool) var generate_animations:bool = true
 export(float) var duration:float = 40.0
+export(Texture) var sprite_texture:Texture setget set_texture
 export(float) var enter_timestamp:float = 0.0
 export(float) var exit_timestamp:float = 0.0
 export(bool) var spin:bool = false
+export(bool) var fade:bool = false
 export(Vector2) var active_scale:Vector2 = FULL_SCALE
 export(Vector2) var inactive_scale:Vector2 = SMALL_SCALE
 
 
-onready var VideoAnimations:AnimationPlayer = $AnimationPlayer
-var EntitySprite:Sprite
+onready var VideoAnimations:AnimationPlayer
+var EntitySprite
+var Collision:CollisionPolygon2D
 
 
 var animation:Animation
@@ -35,6 +38,19 @@ var player_within:bool = false
 func _ready():
 	if has_node("Sprite"):
 		EntitySprite = get_node("Sprite")
+	elif not has_node("ColorRect"):
+		EntitySprite = Sprite.new()
+		EntitySprite.name = "Sprite"
+		add_child(EntitySprite)
+	
+	if has_node("AnimationPlayer"):
+		VideoAnimations = get_node("AnimationPlayer")
+	
+	if sprite_texture != null:
+		set_texture(sprite_texture)
+	
+	if has_node("StaticBody2D/CollisionPolygon2D"):
+		Collision = get_node("StaticBody2D/CollisionPolygon2D")
 	
 	if generate_animations:
 		_create_animation()
@@ -64,23 +80,30 @@ func _create_animation():
 	
 	var track_index = 0
 	
+	_create_track(track_index, ".:visible", true, false, 0.4)
+	if fade: _create_track(track_index, ".:modulate", Color.white, Color(0,0,0,0))
+	
 	# Collision
-	var has_collision = has_node("StaticBody2D/CollisionShape2D")
-	if has_collision:
-		_create_track(track_index, "StaticBody2D/CollisionShape2D:disabled", false, true)
-	#	_create_track(0, "StaticBody2D/CollisionShape2D:scale", FULL_SCALE, SMALL_SCALE)
+	var collision_node
+	if  has_node("StaticBody2D/CollisionShape2D"): collision_node = "StaticBody2D/CollisionShape2D"
+	elif has_node("StaticBody2D/CollisionPolygon2D"): collision_node = "StaticBody2D/CollisionPolygon2D"
+	
+	if collision_node != null:
+		_create_track(track_index, "%s:disabled" % collision_node, false, true)
+#		_create_track(track_index, "StaticBody2D/CollisionShape2D:scale", FULL_SCALE, SMALL_SCALE)
 	
 	# Sprite
-	_create_track(track_index, "Sprite:scale", active_scale, inactive_scale)
-	_create_track(track_index, "Sprite:visible", true, false, 0.4)
+	var is_sprite = is_instance_valid(EntitySprite) and EntitySprite is Sprite
+	var scale_property = "scale" if is_sprite else "rect_scale"
+	var rotation_property = "rotation_degrees" if is_sprite else "rect_rotation"
 	
+	_create_track(track_index, "Sprite:%s" % scale_property, active_scale, inactive_scale)
+
 	# Spin
-	if spin:
-		_create_track(track_index, "Sprite:rotation_degrees", 0, SPIN_DEGREES, 1, false)
-		
-		if has_collision:
-			$StaticBody2D/CollisionShape2D.one_way_collision = false
-			_create_track(track_index, "StaticBody2D/CollisionShape2D:rotation_degrees", 0, SPIN_DEGREES, 1, false)
+	if spin and collision_node != null:
+		get_node(collision_node).one_way_collision = false
+		_create_track(track_index, "Sprite:%s" % rotation_property, 0, SPIN_DEGREES, 1, false)
+		_create_track(track_index, "%s:rotation_degrees" % collision_node, 0, SPIN_DEGREES, 1, false)
 
 
 func _create_track(
@@ -89,7 +112,8 @@ func _create_track(
 	on_value,
 	off_value,
 	offset = 0.0,
-	initial:bool = true):
+	initial:bool = true,
+	transition_time:float = TRANSITION_TIME):
 	
 	animation.add_track(0, index)
 	animation.length = duration
@@ -101,7 +125,7 @@ func _create_track(
 	# off ----
 	
 	if offset == 0:
-		animation.track_insert_key(index, enter_timestamp - TRANSITION_TIME, off_value, TRANSITION_CURVE) # off
+		animation.track_insert_key(index, enter_timestamp - transition_time, off_value, TRANSITION_CURVE) # off
 		animation.track_insert_key(index, enter_timestamp, on_value, TRANSITION_CURVE) # on
 	else:
 		animation.track_insert_key(index, enter_timestamp - offset, on_value, TRANSITION_CURVE) # on
@@ -110,7 +134,7 @@ func _create_track(
 	
 	if offset == 0:
 		animation.track_insert_key(index, exit_timestamp, on_value, TRANSITION_CURVE) # on
-		animation.track_insert_key(index, exit_timestamp + TRANSITION_TIME, off_value, TRANSITION_CURVE) # off
+		animation.track_insert_key(index, exit_timestamp + transition_time, off_value, TRANSITION_CURVE) # off
 	else:
 		animation.track_insert_key(index, exit_timestamp + offset, off_value, TRANSITION_CURVE) # off
 	
@@ -130,3 +154,9 @@ func _on_Area2D_body_entered(body):
 func _on_Area2D_body_exited(body):
 	if body is KinematicBody2D:
 		player_within = false
+
+
+func set_texture(value):
+	sprite_texture = value
+	if is_instance_valid(EntitySprite):
+		EntitySprite.texture = value

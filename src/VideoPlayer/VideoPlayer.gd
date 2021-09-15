@@ -15,7 +15,7 @@ onready var PlayButton = get_node(play_button_path)
 
 onready var Timestamp = $Timestamp
 onready var TimeLeft = $Video/Timeline/TimeLeft
-onready var TimelineNode = $Video/Timeline
+onready var TimelineRoot = $Video/Timeline
 onready var VideoEntities:Node2D = $VideoEntities
 
 onready var Title:Label = $Video/Timeline/Labels/HBoxContainer/Title
@@ -35,9 +35,7 @@ func _ready():
 	State.connect("video_changed", self, "_on_video_changed")
 	
 	get_tree().get_root().connect("size_changed", self, "_on_size_changed")
-	
-	_on_played()
-	
+
 	State.next()
 
 
@@ -47,7 +45,7 @@ func _process(delta):
 	var knob_width = Knob.width
 
 	if knob_dragging:
-		var player_progress = (State.player.position.x - TimelineNode.position.x) / bar_width
+		var player_progress = (State.player.position.x - TimelineRoot.position.x) / bar_width
 		State.timeline.set_progress(player_progress)
 	
 	var progress = State.timeline.progress 
@@ -73,10 +71,11 @@ func set_video(path):
 
 
 func update_positions():
-	var size = OS.get_window_size()
-	
-	var video_position = (size.y - 720) / 2
-	VideoEntities.position.y = video_position
+	pass
+#	var size = OS.get_window_size()
+#
+#	var video_position = (size.y - 720) / 2
+#	VideoEntities.position.y = video_position
 
 
 func _on_PlayButton_pressed():
@@ -94,10 +93,15 @@ func _on_paused():
 func _on_Knob_pressed():
 	knob_dragging = !knob_dragging
 	if knob_dragging:
+		# Attach
 		State.player.fixed_y = Knob.get_global_transform().origin.y - 10
-		State.player.max_x = TimelineBar.rect_position.x + TimelineBar.rect_size.x
+		State.player.max_x = TimelineRoot.position.x + TimelineBar.rect_size.x
+		State.player.min_x = TimelineRoot.position.x
 	else:
+		# Detach
 		State.player.fixed_y = 0.0
+		State.player.max_x = 0.0
+		State.player.min_x = 0.0
 		State.player.jump()
 
 
@@ -114,8 +118,8 @@ func _on_ForwardButton_pressed():
 
 
 func _on_NextButton_pressed():
-#	if current_video.complete:
-	State.next()
+	if current_video.complete:
+		State.next()
 
 
 func _on_video_changed(video):

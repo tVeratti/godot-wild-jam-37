@@ -1,11 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://VideoPlayer/VideoPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Character/Character.tscn" type="PackedScene" id=2]
 
-[sub_resource type="RectangleShape2D" id=8]
-
-[sub_resource type="Environment" id=9]
+[sub_resource type="Environment" id=1]
 background_mode = 4
 glow_enabled = true
 glow_intensity = 0.5
@@ -25,34 +23,5 @@ limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
 
-[node name="Boundaries" type="Node" parent="."]
-
-[node name="Ground" type="StaticBody2D" parent="Boundaries"]
-position = Vector2( 974.303, 1099.57 )
-scale = Vector2( 100, 3.32 )
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Ground"]
-shape = SubResource( 8 )
-
-[node name="Wall" type="StaticBody2D" parent="Boundaries"]
-position = Vector2( -3.77478, 551.223 )
-scale = Vector2( 1, 60 )
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Wall"]
-shape = SubResource( 8 )
-
-[node name="Wall2" type="StaticBody2D" parent="Boundaries"]
-position = Vector2( 1923.61, 554.998 )
-scale = Vector2( 1, 60 )
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Wall2"]
-shape = SubResource( 8 )
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 9 )
+environment = SubResource( 1 )
