@@ -85,6 +85,7 @@ func _create_animation():
 	var track_index = 0
 	
 	_create_track(track_index, ".:visible", true, false, 0.7)
+	_create_track(track_index, "Area2D/CollisionShape2D:disabled", false, true, 0.7)
 	if fade: _create_track(track_index, "Sprite:modulate", Color.white, Color(0,0,0,0))
 	
 	# Collision
@@ -118,6 +119,10 @@ func _create_track(
 	offset = 0.0,
 	initial:bool = true,
 	transition_time:float = TRANSITION_TIME):
+		
+	if not has_node(path.split(':')[0]):
+		print('no path ', name,  path.split(':')[0])
+		return
 	
 	animation.add_track(0, index)
 	animation.length = duration

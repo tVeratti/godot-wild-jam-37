@@ -86,10 +86,9 @@ scale = Vector2( 2.42671, 1.64 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 0.98, 0.538347, 0.4704, 1 )
 frames = SubResource( 11 )
 animation = "walk"
-frame = 4
+frame = 2
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]

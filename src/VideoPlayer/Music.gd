@@ -33,8 +33,6 @@ func _process(delta):
 		var reduction = (VOLUME_THRESHOLD / diff) * -20
 #		Top.volume_db = 1 + reduction
 	
-	print(diff,  ' / ',Top.volume_db)
-	
 	if State.timeline.playing and not Top.playing:
 		_on_played()
 	elif not State.timeline.playing and Top.playing:
