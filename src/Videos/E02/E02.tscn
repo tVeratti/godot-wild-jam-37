@@ -56,7 +56,7 @@ exit_timestamp = 9.0
 position = Vector2( 1538, 182 )
 sprite_texture = ExtResource( 7 )
 enter_timestamp = 6.0
-exit_timestamp = 9.0
+exit_timestamp = 12.0
 
 [node name="FadeIn" parent="." instance=ExtResource( 8 )]
 visible = false

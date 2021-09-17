@@ -8,7 +8,7 @@ signal enter()
 
 
 const MAIN_ANIMATION_NAME = "main"
-const TRANSITION_TIME:float = 0.5
+const TRANSITION_TIME:float = 0.8
 const TRANSITION_CURVE:float = 0.4
 
 const SMALL_SCALE:Vector2 = Vector2(0.1, 0.1)
@@ -84,7 +84,7 @@ func _create_animation():
 	
 	var track_index = 0
 	
-	_create_track(track_index, ".:visible", true, false, 0.4)
+	_create_track(track_index, ".:visible", true, false, 0.7)
 	if fade: _create_track(track_index, "Sprite:modulate", Color.white, Color(0,0,0,0))
 	
 	# Collision

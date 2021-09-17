@@ -35,13 +35,14 @@ __meta__ = {
 }
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2( 930.553, 455.377 )
+position = Vector2( 960, 540 )
 scale = Vector2( 0.905506, 0.905506 )
 
 [node name="Sprite" type="Sprite" parent="Node2D"]
 texture = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="Node2D"]
+visible = false
 margin_left = -100.516
 margin_top = 84.8529
 margin_right = 90.4836

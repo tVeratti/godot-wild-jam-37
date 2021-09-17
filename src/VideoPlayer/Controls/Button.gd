@@ -30,6 +30,7 @@ func _ready():
 		self.texture = _texture
 	
 	OutlineSprite.visible = false
+	FocusSprite.visible = false
 	width = ButtonSprite.texture.get_width()
 
 
@@ -37,12 +38,15 @@ func _process(delta):
 	if Input.is_action_just_pressed("action") and character_within_area:
 		ClickSound.play()
 		ActionAnimation.play("action")
+		FocusSprite.visible = false
+		FocusAnimation.stop()
 		emit_signal("pressed")
 
 
 func disable():
 	disabled = true
-	modulate = Color.gray
+	modulate = Color.dimgray
+	OutlineSprite.visible = false
 	FocusSprite.visible = false
 	FocusAnimation.stop()
 
@@ -96,16 +100,17 @@ func _set_collision_shape(path:String, polygon:PoolVector2Array, scale_up:bool =
 
 func _on_PressArea_body_entered(body):
 	if body is KinematicBody2D:
-		character_within_area = true
-		HoverAnimation.play("hover")
+		if not disabled:
+			character_within_area = true
+			HoverAnimation.play("hover")
 
 
 func _on_PressArea_body_exited(body):
 	if body is KinematicBody2D:
-		FocusSprite.visible = false
-		FocusAnimation.stop()
+#		FocusSprite.visible = false
+#		FocusAnimation.stop()
 		
-		HoverAnimation.play_backwards("hover")
+		if not disabled: HoverAnimation.play_backwards("hover")
 		character_within_area = false
 
 

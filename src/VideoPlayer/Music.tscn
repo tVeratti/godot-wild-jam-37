@@ -24,10 +24,11 @@ script = ExtResource( 2 )
 
 [node name="Base" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -10.0
+volume_db = 1.0
 
 [node name="Top" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
+volume_db = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/play = SubResource( 1 )

@@ -77,8 +77,6 @@ func toggle_play():
 		pause()
 	elif timestamp < duration:
 		play()
-	
-	print(state)
 
 
 func _get_progress():
@@ -92,4 +90,4 @@ func _get_playing():
 func _on_video_changed(video):
 	duration = video.duration
 	set_timestamp(0.0)
-	play()
+#	play()

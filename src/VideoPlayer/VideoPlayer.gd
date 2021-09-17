@@ -70,6 +70,9 @@ func set_video(path):
 	current_video.visible = false
 	VideoEntities.add_child(current_video)
 	
+	if path == "E01":
+		PlayButton.focus()
+	
 	if not current_video.complete: NextButton.disable()
 	else: NextButton.enable()
 	

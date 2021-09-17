@@ -16,6 +16,8 @@ var player
 
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	add_child(timeline)
 
 

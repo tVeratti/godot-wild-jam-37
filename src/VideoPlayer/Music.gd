@@ -31,7 +31,9 @@ func _process(delta):
 	
 	if diff > 0.0:
 		var reduction = (VOLUME_THRESHOLD / diff) * -20
-		Top.volume_db = 1 + reduction
+#		Top.volume_db = 1 + reduction
+	
+	print(diff,  ' / ',Top.volume_db)
 	
 	if State.timeline.playing and not Top.playing:
 		_on_played()
@@ -40,11 +42,13 @@ func _process(delta):
 
 
 func _on_played():
+	print("music played")
 	# Line up the top music to the base
 	Top.play(Base.get_playback_position())
 
 
 func _on_paused():
+	print("music paused")
 	Top.stop()
 
 
