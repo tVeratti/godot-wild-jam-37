@@ -121,7 +121,6 @@ func _create_track(
 	transition_time:float = TRANSITION_TIME):
 		
 	if not has_node(path.split(':')[0]):
-		print('no path ', name,  path.split(':')[0])
 		return
 	
 	animation.add_track(0, index)

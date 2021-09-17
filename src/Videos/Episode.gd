@@ -4,6 +4,7 @@ class_name Episode
 
 var complete:bool = false
 export(float) var duration:float = 40.0
+export(bool) var autoplay:bool = true
 export(String) var title:String = "Title"
 export(String) var episode:String = "Inside the Machine"
 

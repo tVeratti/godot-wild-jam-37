@@ -37,7 +37,11 @@ func _ready():
 	State.timeline.connect("paused", self, "_on_paused")
 	State.timeline.connect("played", self, "_on_played")
 	State.timeline.connect("finished", self, "_on_finished")
+	
 	State.connect("video_completed", self, "_on_completed")
+	State.connect("focus_play", self, "_on_focus_play")
+	State.connect("focus_next", self, "_on_focus_next")
+	State.connect("focus_knob", self, "_on_focus_knob")
 	State.connect("video_changed", self, "_on_video_changed")
 	
 	get_tree().get_root().connect("size_changed", self, "_on_size_changed")
@@ -70,11 +74,10 @@ func set_video(path):
 	current_video.visible = false
 	VideoEntities.add_child(current_video)
 	
-	if path == "E01":
-		PlayButton.focus()
-	
 	if not current_video.complete: NextButton.disable()
 	else: NextButton.enable()
+	
+	if current_video.autoplay: State.timeline.play()
 	
 	State.emit_signal("video_changed", current_video)
 	
@@ -155,6 +158,17 @@ func _on_video_changed(video):
 		Vector2(0, 10),
 	])
 
+
+func _on_focus_play():
+	PlayButton.focus()
+
+
+func _on_focus_next():
+	NextButton.focus()
+
+
+func _on_focus_knob():
+	Knob.focus()
 
 
 func _on_completed():

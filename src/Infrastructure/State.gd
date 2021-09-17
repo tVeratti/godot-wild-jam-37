@@ -3,6 +3,11 @@ extends Node
 signal video_changed(video)
 signal video_completed()
 
+signal focus_play()
+signal focus_next()
+signal focus_knob()
+
+
 var timeline:Timeline = Timeline.new()
 
 const VIDEOS = [

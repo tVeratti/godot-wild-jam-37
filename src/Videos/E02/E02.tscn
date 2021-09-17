@@ -12,7 +12,7 @@
 [node name="E02" type="Node2D"]
 script = ExtResource( 6 )
 duration = 20.0
-title = "E03"
+title = "E02"
 episode = "Baby Steps"
 
 [node name="Background" type="Sprite" parent="."]
@@ -32,17 +32,17 @@ enter_timestamp = 2.0
 exit_timestamp = 10.0
 
 [node name="Platform2" parent="Node2D" instance=ExtResource( 5 )]
-position = Vector2( 628, 172 )
+position = Vector2( 532, 208 )
 enter_timestamp = 3.0
 exit_timestamp = 11.0
 
 [node name="Platform3" parent="Node2D" instance=ExtResource( 5 )]
-position = Vector2( 1024, 84 )
+position = Vector2( 926, 132 )
 enter_timestamp = 4.0
 exit_timestamp = 12.0
 
 [node name="Platform4" parent="Node2D" instance=ExtResource( 5 )]
-position = Vector2( 1310, -16 )
+position = Vector2( 1322, 6 )
 enter_timestamp = 5.0
 exit_timestamp = 13.0
 
