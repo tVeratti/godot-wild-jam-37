@@ -1,6 +1,7 @@
 [gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://VideoPlayer/VideoPlayer.gd" type="Script" id=1]
+[ext_resource path="res://VideoPlayer/Assets/previous.png" type="Texture" id=2]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/Knob.tscn" type="PackedScene" id=3]
 [ext_resource path="res://VideoPlayer/Assets/forward.png" type="Texture" id=5]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/PlayButton.tscn" type="PackedScene" id=6]
@@ -13,15 +14,12 @@
 [ext_resource path="res://VideoPlayer/Controls/Buttons/NextButton.tscn" type="PackedScene" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 1, 1, 1, 1 )
+bg_color = Color( 0.980392, 0.380392, 0.286275, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 0.235294 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 334.32, 10 )
-
-[sub_resource type="RectangleShape2D" id=4]
 
 [node name="VideoPlayer" type="Node2D"]
 script = ExtResource( 1 )
@@ -42,6 +40,7 @@ __meta__ = {
 }
 
 [node name="Timestamp" type="Label" parent="."]
+visible = false
 margin_left = 28.0317
 margin_top = 65.4072
 margin_right = 72.0317
@@ -106,30 +105,33 @@ position = Vector2( 193.376, 0 )
 [node name="NextButton" parent="Video/Timeline/Controls" instance=ExtResource( 13 )]
 position = Vector2( 1499.37, 0 )
 
+[node name="PreviousButton" parent="Video/Timeline/Controls" instance=ExtResource( 13 )]
+position = Vector2( 1424.42, 0 )
+texture = ExtResource( 2 )
+
 [node name="SpeedButton" parent="Video/Timeline/Controls" instance=ExtResource( 8 )]
 position = Vector2( 1585.37, -5 )
 
-[node name="Labels" type="Control" parent="Video/Timeline"]
+[node name="Labels" type="CenterContainer" parent="Video/Timeline"]
 margin_left = 489.782
-margin_top = 104.909
+margin_top = 100.0
 margin_right = 489.782
-margin_bottom = 104.909
+margin_bottom = 100.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Video/Timeline/Labels"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 462.0
+margin_bottom = 38.0
 custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="Video/Timeline/Labels/HBoxContainer"]
-margin_top = 1.0
 margin_right = 228.0
-margin_bottom = 39.0
+margin_bottom = 38.0
 custom_fonts/font = ExtResource( 10 )
 text = "Godot Wild Jam"
 __meta__ = {
@@ -138,28 +140,26 @@ __meta__ = {
 
 [node name="Number" type="Label" parent="Video/Timeline/Labels/HBoxContainer"]
 margin_left = 248.0
-margin_top = 1.0
 margin_right = 347.0
-margin_bottom = 39.0
+margin_bottom = 38.0
 custom_fonts/font = ExtResource( 9 )
-text = "S36:E1"
+text = "S37:E1"
 
 [node name="Episode" type="Label" parent="Video/Timeline/Labels/HBoxContainer"]
 margin_left = 367.0
-margin_top = 1.0
-margin_right = 638.0
-margin_bottom = 39.0
+margin_right = 462.0
+margin_bottom = 38.0
 custom_fonts/font = ExtResource( 9 )
-text = "Inside the Machine"
+text = "Inside "
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Video/Timeline/Labels"]
+position = Vector2( 0, 7 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Video/Timeline/Labels/StaticBody2D"]
-position = Vector2( 318.76, 20.1586 )
-shape = SubResource( 3 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Video/Timeline/Labels/StaticBody2D"]
+polygon = PoolVector2Array( 0, 0, 100, 10 )
 one_way_collision = true
 
 [node name="Boundaries" type="Node" parent="."]
@@ -171,7 +171,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Ground"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Ceiling" type="StaticBody2D" parent="Boundaries"]
 position = Vector2( 957.485, -17.1395 )
@@ -180,7 +180,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Ceiling"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Wall" type="StaticBody2D" parent="Boundaries"]
 position = Vector2( -3.77478, 551.223 )
@@ -189,7 +189,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Wall"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Wall2" type="StaticBody2D" parent="Boundaries"]
 position = Vector2( 1923.61, 554.998 )
@@ -198,11 +198,12 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Wall2"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [connection signal="pressed" from="Video/Timeline/Knob" to="." method="_on_Knob_pressed"]
 [connection signal="pressed" from="Video/Timeline/Controls/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="Video/Timeline/Controls/RewindButton" to="." method="_on_RewindButton_pressed"]
 [connection signal="pressed" from="Video/Timeline/Controls/ForwardButton" to="." method="_on_ForwardButton_pressed"]
 [connection signal="pressed" from="Video/Timeline/Controls/NextButton" to="." method="_on_NextButton_pressed"]
+[connection signal="pressed" from="Video/Timeline/Controls/PreviousButton" to="." method="_on_PreviousButton_pressed"]
 [connection signal="pressed" from="Video/Timeline/Controls/SpeedButton" to="." method="_on_SpeedButton_pressed"]

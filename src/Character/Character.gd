@@ -41,11 +41,11 @@ func _physics_process(delta):
 	if Input.is_action_pressed("left"):
 		velocity.x = -speed
 		facing_right = false
-		if on_floor: sprite_animation = "walk"
+		if on_floor or attached: sprite_animation = "walk"
 	elif Input.is_action_pressed("right"):
 		velocity.x = speed
 		facing_right = true
-		if on_floor: sprite_animation = "walk"
+		if on_floor or attached: sprite_animation = "walk"
 	
 	if Input.is_action_just_pressed("down"):
 		if not FallThroughTimer.time_left > 0:

@@ -8,4 +8,6 @@ func _on_Key_enter():
 
 
 func _on_KeyHole_enter():
-	if key: complete = true
+	if key:
+		complete = true
+		State.emit_signal("video_completed")

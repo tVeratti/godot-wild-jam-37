@@ -18,9 +18,13 @@ onready var TimeLeft = $Video/Timeline/TimeLeft
 onready var TimelineRoot = $Video/Timeline
 onready var VideoEntities:Node2D = $VideoEntities
 
+onready var NextButton = $Video/Timeline/Controls/NextButton
+
+onready var Labels = $Video/Timeline/Labels
 onready var Title:Label = $Video/Timeline/Labels/HBoxContainer/Title
 onready var Number:Label = $Video/Timeline/Labels/HBoxContainer/Number
 onready var Episode:Label = $Video/Timeline/Labels/HBoxContainer/Episode
+onready var LabelsCollision:CollisionPolygon2D = $Video/Timeline/Labels/StaticBody2D/CollisionPolygon2D
 
 var current_video
 
@@ -32,11 +36,11 @@ func _ready():
 	
 	State.timeline.connect("paused", self, "_on_paused")
 	State.timeline.connect("played", self, "_on_played")
+	State.timeline.connect("finished", self, "_on_finished")
+	State.connect("video_completed", self, "_on_completed")
 	State.connect("video_changed", self, "_on_video_changed")
 	
 	get_tree().get_root().connect("size_changed", self, "_on_size_changed")
-
-	State.next()
 
 
 func _process(delta):
@@ -65,6 +69,10 @@ func set_video(path):
 	current_video = Episode.instance()
 	current_video.visible = false
 	VideoEntities.add_child(current_video)
+	
+	if not current_video.complete: NextButton.disable()
+	else: NextButton.enable()
+	
 	State.emit_signal("video_changed", current_video)
 	
 	update_positions()
@@ -79,7 +87,7 @@ func update_positions():
 
 
 func _on_PlayButton_pressed():
-	State.timeline.play()
+	State.timeline.toggle_play()
 
 
 func _on_played():
@@ -89,6 +97,11 @@ func _on_played():
 func _on_paused():
 	PlayButton.texture = play_texture
 
+
+func _on_finished():
+	if current_video.complete:
+		NextButton.focus()
+	
 
 func _on_Knob_pressed():
 	knob_dragging = !knob_dragging
@@ -122,10 +135,32 @@ func _on_NextButton_pressed():
 		State.next()
 
 
+func _on_PreviousButton_pressed():
+	State.previous()
+
+
 func _on_video_changed(video):
-	Number.text = "S36:%s" % video.name
+	Number.text = "S37:%s" % video.title
 	Episode.text = video.episode
+	
+	yield(get_tree(),"idle_frame")
+	var size = Labels.rect_size
+	LabelsCollision.polygon = PoolVector2Array([
+		Vector2(0, 0),
+		Vector2(size.x, 0),
+		Vector2(size.x, 10),
+		Vector2(0, 10),
+	])
+
+
+
+func _on_completed():
+	NextButton.enable()
+	NextButton.focus()
 
 
 func _on_size_changed():
 	update_positions()
+
+
+

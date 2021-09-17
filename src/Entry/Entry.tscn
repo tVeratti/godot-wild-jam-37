@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Fonts/Title.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/KeyE.png" type="Texture" id=2]
+[ext_resource path="res://Entry/Entry.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "blink"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 0.594604, 0.466517 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
+}
+
+[node name="Entry" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 930.553, 455.377 )
+scale = Vector2( 0.905506, 0.905506 )
+
+[node name="Sprite" type="Sprite" parent="Node2D"]
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Node2D"]
+margin_left = -100.516
+margin_top = 84.8529
+margin_right = 90.4836
+margin_bottom = 199.853
+custom_fonts/font = ExtResource( 1 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/blink = SubResource( 1 )

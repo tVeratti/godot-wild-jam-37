@@ -3,6 +3,7 @@ extends Node
 
 class_name Timeline
 
+signal finished()
 signal played()
 signal paused()
 signal timestamp_changed()
@@ -19,24 +20,32 @@ var progress:float = 0.0 setget , _get_progress
 var playing:bool setget , _get_playing
 
 enum States { PLAYING, PAUSED }
-var state:int = States.PLAYING
+var state:int = States.PAUSED
 
 func _ready():
 	State.connect("video_changed", self, "_on_video_changed")
 
 
 func _process(delta):
-	if self.playing:
+	var previous_playing = self.playing
+	if previous_playing:
 		timestamp += 1 * playback_speed * delta
+	
 	timestamp = clamp(timestamp, 0, duration)
+	
+	if previous_playing and timestamp >= duration:
+		pause()
+		emit_signal("finished")
 
 
 func play():
-	_toggle_play()
+	state = States.PLAYING
+	emit_signal("played")
 
 
 func pause():
-	_toggle_play()
+	state = States.PAUSED
+	emit_signal("paused")
 
 
 func rewind():
@@ -52,10 +61,9 @@ func set_progress(value):
 
 
 func set_timestamp(value):
-	state = States.PAUSED
+#	state = States.PAUSED
 	timestamp = clamp(value, 0, duration)
 	emit_signal("timestamp_changed")
-	emit_signal("paused")
 
 
 func toggle_playback_speed():
@@ -64,13 +72,13 @@ func toggle_playback_speed():
 	emit_signal("playback_speed_changed")
 
 
-func _toggle_play():
+func toggle_play():
 	if self.playing:
-		state = States.PAUSED
-		emit_signal("paused")
-	else:
-		state = States.PLAYING
-		emit_signal("played")	
+		pause()
+	elif timestamp < duration:
+		play()
+	
+	print(state)
 
 
 func _get_progress():
@@ -78,7 +86,7 @@ func _get_progress():
 
 
 func _get_playing():
-	return state == States.PLAYING
+	return state == States.PLAYING and timestamp < duration
 
 
 func _on_video_changed(video):

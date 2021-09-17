@@ -43,6 +43,10 @@ func _ready():
 		EntitySprite.name = "Sprite"
 		add_child(EntitySprite)
 	
+#	if EntitySprite.has("material"):
+#		var mat = Material.new()
+#		EntitySprite.mat
+	
 	if has_node("AnimationPlayer"):
 		VideoAnimations = get_node("AnimationPlayer")
 	
@@ -81,7 +85,7 @@ func _create_animation():
 	var track_index = 0
 	
 	_create_track(track_index, ".:visible", true, false, 0.4)
-	if fade: _create_track(track_index, ".:modulate", Color.white, Color(0,0,0,0))
+	if fade: _create_track(track_index, "Sprite:modulate", Color.white, Color(0,0,0,0))
 	
 	# Collision
 	var collision_node
