@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://VideoPlayer/VideoPlayer.gd" type="Script" id=1]
 [ext_resource path="res://VideoPlayer/Assets/previous.png" type="Texture" id=2]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/Knob.tscn" type="PackedScene" id=3]
+[ext_resource path="res://VideoPlayer/Assets/circle_outline.png" type="Texture" id=4]
 [ext_resource path="res://VideoPlayer/Assets/forward.png" type="Texture" id=5]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/PlayButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://VideoPlayer/Assets/pause.png" type="Texture" id=7]
@@ -12,6 +13,7 @@
 [ext_resource path="res://VideoPlayer/Controls/Buttons/RewindButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/ForwardButton.tscn" type="PackedScene" id=12]
 [ext_resource path="res://VideoPlayer/Controls/Buttons/NextButton.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Fonts/BoldSmall.tres" type="DynamicFont" id=14]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.980392, 0.380392, 0.286275, 1 )
@@ -81,16 +83,24 @@ one_way_collision = true
 position = Vector2( 10, -15.937 )
 
 [node name="TimeLeft" type="Label" parent="Video/Timeline"]
-margin_left = 1684.62
-margin_top = -3.92969
-margin_right = 1724.62
-margin_bottom = 10.0703
+margin_left = 1690.44
+margin_top = -6.39221
+margin_right = 1731.44
+margin_bottom = 12.6078
+custom_fonts/font = ExtResource( 14 )
+text = "00:00"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Controls" type="Node2D" parent="Video/Timeline"]
 position = Vector2( 0, 109.063 )
+
+[node name="LockedSprite" type="Sprite" parent="Video/Timeline/Controls"]
+visible = false
+modulate = Color( 0.360784, 0.360784, 0.360784, 1 )
+position = Vector2( 1519.98, 19.841 )
+texture = ExtResource( 4 )
 
 [node name="PlayButton" parent="Video/Timeline/Controls" instance=ExtResource( 6 )]
 position = Vector2( 0, 4 )
@@ -122,7 +132,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Video/Timeline/Labels"]
-margin_right = 462.0
+margin_right = 647.0
 margin_bottom = 38.0
 custom_constants/separation = 20
 __meta__ = {
@@ -147,10 +157,10 @@ text = "S37:E1"
 
 [node name="Episode" type="Label" parent="Video/Timeline/Labels/HBoxContainer"]
 margin_left = 367.0
-margin_right = 462.0
+margin_right = 647.0
 margin_bottom = 38.0
 custom_fonts/font = ExtResource( 9 )
-text = "Inside "
+text = "Inside The Machine"
 __meta__ = {
 "_edit_use_anchors_": false
 }

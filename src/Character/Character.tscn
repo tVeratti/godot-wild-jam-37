@@ -93,11 +93,13 @@ playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 1.5, 1.5 )
 limit_left = 0
 limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
 limit_smoothed = true
+smoothing_enabled = true
 
 [node name="JumpBoostTimer" type="Timer" parent="."]
 wait_time = 0.2

@@ -94,15 +94,16 @@ func _create_animation():
 	elif has_node("StaticBody2D/CollisionPolygon2D"): collision_node = "StaticBody2D/CollisionPolygon2D"
 	
 	if collision_node != null:
-		_create_track(track_index, "%s:disabled" % collision_node, false, true)
-#		_create_track(track_index, "StaticBody2D/CollisionShape2D:scale", FULL_SCALE, SMALL_SCALE)
+		_create_track(track_index, "%s:disabled" % collision_node, false, true, 0.7)
+		_create_track(track_index, "StaticBody2D/CollisionShape2D:scale", active_scale, inactive_scale)
 	
 	# Sprite
 	var is_sprite = is_instance_valid(EntitySprite) and EntitySprite is Sprite
-	var scale_property = "scale" if is_sprite else "rect_scale"
 	var rotation_property = "rotation_degrees" if is_sprite else "rect_rotation"
 	
-	_create_track(track_index, "Sprite:%s" % scale_property, active_scale, inactive_scale)
+	if active_scale != inactive_scale:
+		var scale_node = "scale" if is_sprite else "rect_scale"
+		_create_track(track_index, "Sprite:%s" % scale_node, active_scale, inactive_scale)
 
 	# Spin
 	if spin and collision_node != null:
@@ -136,7 +137,7 @@ func _create_track(
 		animation.track_insert_key(index, enter_timestamp - transition_time, off_value, TRANSITION_CURVE) # off
 		animation.track_insert_key(index, enter_timestamp, on_value, TRANSITION_CURVE) # on
 	else:
-		animation.track_insert_key(index, enter_timestamp - offset, on_value, TRANSITION_CURVE) # on
+		animation.track_insert_key(index, enter_timestamp - offset, on_value, 1) # on
 		
 	# on ----
 	
@@ -144,7 +145,7 @@ func _create_track(
 		animation.track_insert_key(index, exit_timestamp, on_value, TRANSITION_CURVE) # on
 		animation.track_insert_key(index, exit_timestamp + transition_time, off_value, TRANSITION_CURVE) # off
 	else:
-		animation.track_insert_key(index, exit_timestamp + offset, off_value, TRANSITION_CURVE) # off
+		animation.track_insert_key(index, exit_timestamp + offset, off_value, 1) # off
 	
 	index += 1
 

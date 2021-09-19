@@ -26,12 +26,16 @@ var character_within_area:bool = false
 
 
 func _ready():
+	State.connect("video_changed", self, "_on_video_changed")
+	
 	if _texture != null:
 		self.texture = _texture
 	
 	OutlineSprite.visible = false
 	FocusSprite.visible = false
 	width = ButtonSprite.texture.get_width()
+	
+	FocusSprite.position = OutlineSprite.position
 
 
 func _process(delta):
@@ -59,6 +63,11 @@ func enable():
 func focus():
 	FocusSprite.visible = true
 	FocusAnimation.play("focus")
+
+
+func reset():
+	FocusSprite.visible = false
+	FocusAnimation.stop()
 
 
 func _set_texture(value):
@@ -96,6 +105,10 @@ func _set_collision_shape(path:String, polygon:PoolVector2Array, scale_up:bool =
 	
 	if scale_up:
 		node.scale = Vector2(1.2, 1.2)
+
+
+func _on_video_changed(_video):
+	reset()
 
 
 func _on_PressArea_body_entered(body):

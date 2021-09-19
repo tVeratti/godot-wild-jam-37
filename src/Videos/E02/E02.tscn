@@ -1,65 +1,52 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://VideoPlayer/video_player.png" type="Texture" id=1]
-[ext_resource path="res://Entity/Assets/key.png" type="Texture" id=2]
-[ext_resource path="res://Entity/Yoink/Yoink.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entity/Yoink/Yoinks/Key.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Entity/Yoink/Yoinks/Unlock.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Entity/Entities/Background.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Entity/Platforms/Platform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Videos/E02/E02.gd" type="Script" id=6]
-[ext_resource path="res://Entity/Assets/keyhole.png" type="Texture" id=7]
-[ext_resource path="res://Entity/Entities/FadeIn.tscn" type="PackedScene" id=8]
 
 [node name="E02" type="Node2D"]
 script = ExtResource( 6 )
 duration = 20.0
 title = "E02"
-episode = "Baby Steps"
-
-[node name="Background" type="Sprite" parent="."]
-modulate = Color( 0.12549, 0.12549, 0.12549, 1 )
-scale = Vector2( 1.5, 1 )
-texture = ExtResource( 1 )
-centered = false
+episode = "The Key"
 
 [node name="VideoBG" parent="." instance=ExtResource( 4 )]
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2( 92, 324 )
+position = Vector2( 126, 400 )
 
 [node name="Platform" parent="Node2D" instance=ExtResource( 5 )]
-position = Vector2( 200, 264 )
+position = Vector2( 150, 200 )
 enter_timestamp = 2.0
 exit_timestamp = 10.0
 
 [node name="Platform2" parent="Node2D" instance=ExtResource( 5 )]
-position = Vector2( 532, 208 )
+position = Vector2( 500, 150 )
 enter_timestamp = 3.0
 exit_timestamp = 11.0
 
 [node name="Platform3" parent="Node2D" instance=ExtResource( 5 )]
-position = Vector2( 926, 132 )
+position = Vector2( 850, 50 )
 enter_timestamp = 4.0
 exit_timestamp = 12.0
 
 [node name="Platform4" parent="Node2D" instance=ExtResource( 5 )]
-position = Vector2( 1322, 6 )
+position = Vector2( 1200, -100 )
 enter_timestamp = 5.0
 exit_timestamp = 13.0
 
-[node name="Key" parent="." instance=ExtResource( 3 )]
-position = Vector2( 442, 480 )
-sprite_texture = ExtResource( 2 )
+[node name="Key" parent="." instance=ExtResource( 1 )]
+position = Vector2( 420.812, 430.167 )
 enter_timestamp = 3.0
 exit_timestamp = 9.0
+label = "Key"
 
-[node name="KeyHole" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1538, 182 )
-sprite_texture = ExtResource( 7 )
+[node name="Unlock" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1472.27, 161.966 )
 enter_timestamp = 6.0
 exit_timestamp = 12.0
 
-[node name="FadeIn" parent="." instance=ExtResource( 8 )]
-visible = false
-
 [connection signal="enter" from="Key" to="." method="_on_Key_enter"]
-[connection signal="enter" from="KeyHole" to="." method="_on_KeyHole_enter"]
+[connection signal="enter" from="Unlock" to="." method="_on_Unlock_enter"]

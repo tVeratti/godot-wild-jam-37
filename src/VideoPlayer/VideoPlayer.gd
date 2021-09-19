@@ -13,6 +13,8 @@ onready var Knob = get_node(knob_path)
 export(NodePath) var play_button_path
 onready var PlayButton = get_node(play_button_path)
 
+#onready var LockedSprite = $Video/Timeline/Controls/LockedSprite
+
 onready var Timestamp = $Timestamp
 onready var TimeLeft = $Video/Timeline/TimeLeft
 onready var TimelineRoot = $Video/Timeline
@@ -45,6 +47,8 @@ func _ready():
 	State.connect("video_changed", self, "_on_video_changed")
 	
 	get_tree().get_root().connect("size_changed", self, "_on_size_changed")
+	
+	State.next()
 
 
 func _process(delta):
@@ -72,24 +76,25 @@ func set_video(path):
 	var Episode = load("res://Videos/%s/%s.tscn" % [path, path])
 	current_video = Episode.instance()
 	current_video.visible = false
-	VideoEntities.add_child(current_video)
-	
-	if not current_video.complete: NextButton.disable()
-	else: NextButton.enable()
-	
-	if current_video.autoplay: State.timeline.play()
 	
 	State.emit_signal("video_changed", current_video)
+	
+	VideoEntities.add_child(current_video)
+	
+	if not current_video.complete:
+#		LockedSprite.visible = true
+		NextButton.disable()
+	else:
+#		LockedSprite.visible = false
+		NextButton.enable()
+	
+	if current_video.autoplay: State.timeline.play()
 	
 	update_positions()
 
 
 func update_positions():
 	pass
-#	var size = OS.get_window_size()
-#
-#	var video_position = (size.y - 720) / 2
-#	VideoEntities.position.y = video_position
 
 
 func _on_PlayButton_pressed():
@@ -106,6 +111,7 @@ func _on_paused():
 
 func _on_finished():
 	if current_video.complete:
+#		LockedSprite.visible = false
 		NextButton.focus()
 	
 
@@ -146,10 +152,11 @@ func _on_PreviousButton_pressed():
 
 
 func _on_video_changed(video):
-	Number.text = "S37:%s" % video.title
-	Episode.text = video.episode
+	Number.text = "S37:%s" % current_video.title
+	Episode.text = current_video.episode
 	
 	yield(get_tree(),"idle_frame")
+	
 	var size = Labels.rect_size
 	LabelsCollision.polygon = PoolVector2Array([
 		Vector2(0, 0),
@@ -174,6 +181,7 @@ func _on_focus_knob():
 func _on_completed():
 	NextButton.enable()
 	NextButton.focus()
+#	LockedSprite.visible = false
 
 
 func _on_size_changed():

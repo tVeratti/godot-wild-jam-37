@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Videos/E04/E04.gd" type="Script" id=1]
+[ext_resource path="res://Entity/Entities/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Entity/Yoink/Yoinks/Unlock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entity/Platforms/Platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entity/Yoink/Yoinks/Key.tscn" type="PackedScene" id=6]
+
+[node name="E04" type="Node2D"]
+script = ExtResource( 1 )
+duration = 8.0
+title = "04"
+episode = "Don't Blink"
+
+[node name="VideoBG" parent="." instance=ExtResource( 2 )]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 148.867, 200.433 )
+
+[node name="Platform" parent="Node2D" instance=ExtResource( 4 )]
+position = Vector2( 3.66483, 304.434 )
+enter_timestamp = 2.0
+exit_timestamp = 2.8
+inactive_scale = Vector2( 0.1, 1 )
+
+[node name="Platform2" parent="Node2D" instance=ExtResource( 4 )]
+position = Vector2( 438.934, 224.035 )
+enter_timestamp = 2.8
+exit_timestamp = 3.6
+inactive_scale = Vector2( 0.1, 1 )
+
+[node name="Platform4" parent="Node2D" instance=ExtResource( 4 )]
+position = Vector2( 867.032, 146.866 )
+enter_timestamp = 3.6
+exit_timestamp = 4.4
+inactive_scale = Vector2( 0.1, 1 )
+
+[node name="Platform5" parent="Node2D" instance=ExtResource( 4 )]
+position = Vector2( 1294.1, 65.3333 )
+enter_timestamp = 4.4
+exit_timestamp = 5.2
+inactive_scale = Vector2( 0.1, 1 )
+
+[node name="Key" parent="." instance=ExtResource( 6 )]
+position = Vector2( 152.532, 376.801 )
+enter_timestamp = 1.5
+exit_timestamp = 2.5
+
+[node name="Unlock" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1722.61, 103.367 )
+enter_timestamp = 3.5
+exit_timestamp = 4.5
+
+[connection signal="enter" from="Key" to="." method="_on_Key_enter"]
+[connection signal="enter" from="Unlock" to="." method="_on_Unlock_enter"]
