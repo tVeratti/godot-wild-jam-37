@@ -1,14 +1,20 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://VideoPlayer/Controls/button.png" type="Texture" id=1]
 [ext_resource path="res://VideoPlayer/Controls/Button.gd" type="Script" id=2]
 [ext_resource path="res://VideoPlayer/Assets/circle.png" type="Texture" id=3]
 [ext_resource path="res://VideoPlayer/Assets/button-19.wav" type="AudioStream" id=4]
-[ext_resource path="res://VideoPlayer/Assets/circle_outline.png" type="Texture" id=5]
+[ext_resource path="res://Entity/Assets/splash.png" type="Texture" id=5]
 [ext_resource path="res://Assets/KeyE.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Fonts/Regular.tres" type="DynamicFont" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.113725, 0.113725, 0.113725, 1 )
+bg_color = Color( 0.113725, 0.113725, 0.113725, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -81,29 +87,38 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 
 [node name="Focus" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.431373 )
+modulate = Color( 1, 1, 1, 0.458824 )
 position = Vector2( 20, 20 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
 
 [node name="Panel" type="Panel" parent="Focus"]
 visible = false
-margin_left = 35.2233
-margin_top = -74.5524
-margin_right = 85.2233
-margin_bottom = -24.5524
+modulate = Color( 1, 1, 1, 0.545098 )
+margin_left = 31.3463
+margin_top = -75.1727
+margin_right = 81.3463
+margin_bottom = -25.1727
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="Focus/Panel"]
+margin_left = 15.2672
+margin_top = 5.73791
+margin_right = 55.2672
+margin_bottom = 43.7379
+custom_fonts/font = ExtResource( 7 )
+text = "E"
+
 [node name="Sprite" type="Sprite" parent="Focus"]
-modulate = Color( 1, 1, 1, 0.776471 )
-position = Vector2( 47.8743, -42.2626 )
-scale = Vector2( 0.2, 0.2 )
+position = Vector2( 72.6869, -62.5779 )
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 6 )
 
 [node name="Line2D" type="Line2D" parent="Focus"]
-position = Vector2( 27.4801, -22.309 )
+position = Vector2( 45.7794, -37.5067 )
 points = PoolVector2Array( 0, 0, 7, -7 )
 width = 2.0
 default_color = Color( 1, 1, 1, 1 )

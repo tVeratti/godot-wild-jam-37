@@ -1,12 +1,13 @@
 extends Episode
 
+# EPISODE 01
 
 func _ready():
-	._ready()
-	
 	autoplay = false
 	complete = true
 	
-	State.emit_signal("focus_play")
+	if not State.timeline.playing:
+		State.emit_signal("focus_play")
+
 
 

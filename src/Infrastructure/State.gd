@@ -1,5 +1,8 @@
 extends Node
 
+signal key_yoinked()
+signal keyhole_unlocked()
+
 signal video_changed(video)
 signal video_completed()
 
@@ -12,7 +15,11 @@ var timeline:Timeline = Timeline.new()
 
 const VIDEOS = [
 	"E01",
-	"E02"
+	"E02",
+	"E03",
+	"E04",
+	"E05",
+	"E06"
 ]
 
 var video_player

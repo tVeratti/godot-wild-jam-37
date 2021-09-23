@@ -20,11 +20,12 @@ tracks/0/keys = {
 [node name="Platform" type="Node2D"]
 position = Vector2( 0, -2 )
 script = ExtResource( 1 )
-inactive_scale = Vector2( 0.1, 1 )
+inactive_scale = Vector2( 0.3, 1 )
 
 [node name="Sprite" type="ColorRect" parent="."]
 margin_right = 300.0
-margin_bottom = 2.0
+margin_bottom = 3.0
+rect_min_size = Vector2( 0, 3 )
 rect_pivot_offset = Vector2( 150, 1 )
 __meta__ = {
 "_edit_use_anchors_": false

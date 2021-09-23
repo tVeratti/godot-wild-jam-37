@@ -5,20 +5,21 @@
 
 [node name="Button" instance=ExtResource( 1 )]
 
-[node name="PressArea" parent="." index="0"]
+[node name="PressArea" parent="." index="1"]
 collision_layer = 5
 collision_mask = 5
-
-[node name="Sprite" parent="PressArea" index="0"]
-modulate = Color( 0.980392, 0.380392, 0.286275, 1 )
-texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PressArea" index="1"]
 position = Vector2( -6.05197, -4.36535 )
 scale = Vector2( 1.3, 1.3 )
 polygon = PoolVector2Array( 35.0529, 3.71759, 38, 7.4, 40.708, 12.3491, 40.4104, 26.9333, 36.938, 32.5885, 32.771, 36.6562, 28.3065, 39.3349, 11.2419, 39.6325, 4.29702, 34.2751, 1.91592, 31.5963, 0.03088, 28.4215, 0, 11.6, 4.29702, 4.70972, 7.5, 2, 11.2419, -0.64776, 28.4057, -0.548548 )
 
+[node name="Sprite" parent="PressArea" index="2"]
+modulate = Color( 0.980392, 0.380392, 0.286275, 1 )
+texture = ExtResource( 2 )
+
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Platform" index="0"]
 position = Vector2( -0.0992126, 0.496063 )
 polygon = PoolVector2Array( 35.0529, 3.71759, 38, 7.4, 40.708, 12.3491, 40.4104, 26.9333, 36.938, 32.5885, 32.771, 36.6562, 28.3065, 39.3349, 11.2419, 39.6325, 4.29702, 34.2751, 1.91592, 31.5963, 0.03088, 28.4215, 0, 11.6, 4.29702, 4.70972, 7.5, 2, 11.2419, -0.64776, 28.4057, -0.548548 )
+disabled = true
 one_way_collision = true
